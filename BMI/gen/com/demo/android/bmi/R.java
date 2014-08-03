@@ -1244,6 +1244,8 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
+        public static final int about_msg=0x7f0a0017;
+        public static final int about_title=0x7f0a0016;
         public static final int action_settings=0x7f0a0011;
         public static final int advice_average=0x7f0a000e;
         public static final int advice_heavy=0x7f0a000f;
@@ -1252,6 +1254,7 @@ containing a value of this type.
         public static final int bmi_btn=0x7f0a0014;
         public static final int bmi_result=0x7f0a0015;
         public static final int height=0x7f0a0012;
+        public static final int ok_label=0x7f0a0018;
         public static final int weight=0x7f0a0013;
     }
     public static final class style {

@@ -3,6 +3,7 @@ package com.demo.android.bmi;
 import java.text.DecimalFormat;
 
 import android.support.v7.app.ActionBarActivity;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
@@ -71,8 +72,25 @@ public class Bmi extends ActionBarActivity {
 			else {
 				view_suggest.setText(R.string.advice_average);
 			}
+			
+			openOptionsDialog();
 		}
 	};
+	
+	private void openOptionsDialog() {
+		new AlertDialog.Builder(Bmi.this)
+		.setTitle(R.string.about_title)
+		.setMessage(R.string.about_msg)
+		.setPositiveButton(R.string.ok_label, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+		})
+		.show();
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
