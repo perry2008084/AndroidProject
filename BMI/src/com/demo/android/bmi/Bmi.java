@@ -20,34 +20,56 @@ public class Bmi extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bmi);
 		
-		// listen for button clicks
-		Button button = (Button)findViewById(R.id.submit);
-		button.setOnClickListener((android.view.View.OnClickListener) calcBMI);
+		findViews();
+		setListensers();
 	}
 	
-	private android.view.View.OnClickListener calcBMI = new android.view.View.OnClickListener() {	
+	private Button button_calc;
+	private EditText fieldheight;
+	private EditText fieldweight;
+	private TextView view_result;
+	private TextView view_suggest;
+	
+	private void findViews()
+	{
+		button_calc = (Button) findViewById(R.id.submit);
+		fieldheight = (EditText) findViewById(R.id.height);
+		fieldweight = (EditText) findViewById(R.id.weight);
+		view_result = (TextView) findViewById(R.id.result);
+		view_suggest = (TextView) findViewById(R.id.suggest);
+	}
+	
+	private void setListensers()
+	{
+		button_calc.setOnClickListener((android.view.View.OnClickListener) calcBMI);
+	}
+		
+		// listen for button clicks
+//		Button button = (Button)findViewById(R.id.submit);
+//		button.setOnClickListener((android.view.View.OnClickListener) calcBMI);
+	
+	
+	private Button.OnClickListener calcBMI = new Button.OnClickListener() {	
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			DecimalFormat nf = new DecimalFormat("0.00");
-			EditText fieldheight = (EditText)findViewById(R.id.height);
-			EditText fieldweight = (EditText)findViewById(R.id.weight);
 			double height = Double.parseDouble(fieldheight.getText().toString())/100;
 			double weight = Double.parseDouble(fieldweight.getText().toString());
 			double BMI = weight/(height * height);
-			TextView result = (TextView)findViewById(R.id.result);
-			result.setText("Your BMI is "+nf.format(BMI));
+			
+			// Present result
+			view_result.setText("Your BMI is "+nf.format(BMI));
 			
 			// give health advice
-			TextView fieldsuggest = (TextView)findViewById(R.id.suggest);
 			if(BMI>25) {
-				fieldsuggest.setText(R.string.advice_heavy);
+				view_suggest.setText(R.string.advice_heavy);
 			}
 			else if(BMI<20) {
-				fieldsuggest.setText(R.string.advice_light);
+				view_suggest.setText(R.string.advice_light);
 			}
 			else {
-				fieldsuggest.setText(R.string.advice_average);
+				view_suggest.setText(R.string.advice_average);
 			}
 		}
 	};
