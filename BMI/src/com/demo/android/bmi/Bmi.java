@@ -2,17 +2,19 @@ package com.demo.android.bmi;
 
 import java.text.DecimalFormat;
 
-import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Bmi extends ActionBarActivity {
 
@@ -55,29 +57,37 @@ public class Bmi extends ActionBarActivity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			DecimalFormat nf = new DecimalFormat("0.00");
-			double height = Double.parseDouble(fieldheight.getText().toString())/100;
-			double weight = Double.parseDouble(fieldweight.getText().toString());
-			double BMI = weight/(height * height);
-			
-			// Present result
-			view_result.setText("Your BMI is "+nf.format(BMI));
-			
-			// give health advice
-			if(BMI>25) {
-				view_suggest.setText(R.string.advice_heavy);
+			try {
+				double height = Double.parseDouble(fieldheight.getText().toString())/100;
+				double weight = Double.parseDouble(fieldweight.getText().toString());
+				double BMI = weight/(height * height);
+				
+				// Present result
+				view_result.setText("Your BMI is "+nf.format(BMI));
+				
+				// give health advice
+				if(BMI>25) {
+					view_suggest.setText(R.string.advice_heavy);
+				}
+				else if(BMI<20) {
+					view_suggest.setText(R.string.advice_light);
+				}
+				else {
+					view_suggest.setText(R.string.advice_average);
+				}
+				
+				openOptionsDialog();
 			}
-			else if(BMI<20) {
-				view_suggest.setText(R.string.advice_light);
+			catch(Exception err)
+			{
+				Toast.makeText(Bmi.this, R.string.input_error, Toast.LENGTH_SHORT).show();
 			}
-			else {
-				view_suggest.setText(R.string.advice_average);
-			}
-			
-			openOptionsDialog();
 		}
 	};
 	
 	private void openOptionsDialog() {
+		//Toast.makeText(Bmi.this, "BMI ¼ÆËãÆ÷", Toast.LENGTH_SHORT).show();
+		
 		new AlertDialog.Builder(Bmi.this)
 		.setTitle(R.string.about_title)
 		.setMessage(R.string.about_msg)
@@ -89,7 +99,19 @@ public class Bmi extends ActionBarActivity {
 				
 			}
 		})
+		.setNegativeButton(R.string.homepage_label, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				// go to url
+				Uri uri = Uri.parse(getString(R.string.homepage_uri));
+				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+				startActivity(intent);				
+			}
+		})
 		.show();
+		
 	}
 
 	@Override

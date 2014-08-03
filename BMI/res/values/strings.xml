@@ -9,4 +9,8 @@
 	<string name="about_title">关于 Android BMI</string>
 	<string name="about_msg">Android BMI Calc\n 作者 perry</string>
 	<string name="ok_label">确认</string>
+	<string name="input_error">打错了吗？只能输入数字喔</string>
+	<string name="homepage_label">首页</string>
+	<string name="homepage_uri">http://www.baidu.com</string>
+	
 </resources>

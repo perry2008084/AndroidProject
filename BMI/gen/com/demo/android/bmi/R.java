@@ -1254,6 +1254,9 @@ containing a value of this type.
         public static final int bmi_btn=0x7f0a0014;
         public static final int bmi_result=0x7f0a0015;
         public static final int height=0x7f0a0012;
+        public static final int homepage_label=0x7f0a001a;
+        public static final int homepage_uri=0x7f0a001b;
+        public static final int input_error=0x7f0a0019;
         public static final int ok_label=0x7f0a0018;
         public static final int weight=0x7f0a0013;
     }
