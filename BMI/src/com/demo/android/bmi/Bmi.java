@@ -85,6 +85,10 @@ public class Bmi extends ActionBarActivity {
 			
 			Intent intent = new Intent();
 			intent.setClass(Bmi.this, Report.class);
+			Bundle bundle = new Bundle();
+			bundle.putString("KEY_HEIGHT", fieldheight.getText().toString());
+			bundle.putString("KEY_WEIGHT", fieldweight.getText().toString());
+			intent.putExtra("REPORT_INTENT", bundle);
 			startActivity(intent);
 		}
 	};
