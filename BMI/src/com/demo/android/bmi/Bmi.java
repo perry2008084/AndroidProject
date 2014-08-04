@@ -56,32 +56,36 @@ public class Bmi extends ActionBarActivity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			DecimalFormat nf = new DecimalFormat("0.00");
-			try {
-				double height = Double.parseDouble(fieldheight.getText().toString())/100;
-				double weight = Double.parseDouble(fieldweight.getText().toString());
-				double BMI = weight/(height * height);
-				
-				// Present result
-				view_result.setText("Your BMI is "+nf.format(BMI));
-				
-				// give health advice
-				if(BMI>25) {
-					view_suggest.setText(R.string.advice_heavy);
-				}
-				else if(BMI<20) {
-					view_suggest.setText(R.string.advice_light);
-				}
-				else {
-					view_suggest.setText(R.string.advice_average);
-				}
-				
-				openOptionsDialog();
-			}
-			catch(Exception err)
-			{
-				Toast.makeText(Bmi.this, R.string.input_error, Toast.LENGTH_SHORT).show();
-			}
+//			DecimalFormat nf = new DecimalFormat("0.00");
+//			try {
+//				double height = Double.parseDouble(fieldheight.getText().toString())/100;
+//				double weight = Double.parseDouble(fieldweight.getText().toString());
+//				double BMI = weight/(height * height);
+//				
+//				// Present result
+//				view_result.setText("Your BMI is "+nf.format(BMI));
+//				
+//				// give health advice
+//				if(BMI>25) {
+//					view_suggest.setText(R.string.advice_heavy);
+//				}
+//				else if(BMI<20) {
+//					view_suggest.setText(R.string.advice_light);
+//				}
+//				else {
+//					view_suggest.setText(R.string.advice_average);
+//				}
+//				
+//				//openOptionsDialog();
+//			}
+//			catch(Exception err)
+//			{
+//				Toast.makeText(Bmi.this, R.string.input_error, Toast.LENGTH_SHORT).show();
+//			}
+			
+			Intent intent = new Intent();
+			intent.setClass(Bmi.this, Report.class);
+			startActivity(intent);
 		}
 	};
 	
@@ -113,11 +117,16 @@ public class Bmi extends ActionBarActivity {
 		.show();
 		
 	}
+	
+	protected static final int MENU_ABOUT = Menu.FIRST;
+	protected static final int MENU_Quit = Menu.FIRST + 1;
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.bmi, menu);
+		menu.add(0, MENU_ABOUT, 0, "¹ØÓÚ...");
+		menu.add(0, MENU_Quit, 0, "½áÊø");
 		return true;
 	}
 
@@ -126,10 +135,21 @@ public class Bmi extends ActionBarActivity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+//		int id = item.getItemId();
+//		if (id == R.id.action_settings) {
+//			return true;
+//		}
+//		return super.onOptionsItemSelected(item);
+		
+		super.onOptionsItemSelected(item);
+		switch(item.getItemId()) {
+		case MENU_ABOUT:
+			openOptionsDialog();
+			break;
+		case MENU_Quit:
+			finish();
+			break;
 		}
-		return super.onOptionsItemSelected(item);
+		return true;
 	}
 }
