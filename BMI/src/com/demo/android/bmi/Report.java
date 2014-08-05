@@ -47,7 +47,7 @@ public class Report extends ActionBarActivity {
 	private void showResults() {
 		DecimalFormat nf = new DecimalFormat("0.00");
 		
-		Bundle bunde = this.getIntent().getExtras();
+		Bundle bunde = this.getIntent().getBundleExtra("REPORT_INTENT");
 		double height = Double.parseDouble(bunde.getString("KEY_HEIGHT"))/100;
 		double weight = Double.parseDouble(bunde.getString("KEY_WEIGHT"));
 		double BMI = weight / (height * height);
