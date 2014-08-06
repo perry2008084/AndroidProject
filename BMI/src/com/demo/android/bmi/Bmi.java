@@ -5,9 +5,11 @@ import java.text.DecimalFormat;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Bmi extends ActionBarActivity {
+	private static final String TAG = "Bmi";
+	public static final String PREF = "BMI_PREF";
+	public static final String PREF_HEIGHT = "BMI_Height";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +29,9 @@ public class Bmi extends ActionBarActivity {
 		setContentView(R.layout.activity_bmi);
 		
 		findViews();
+		restorePrefs();
 		setListensers();
+		Log.v(TAG, "onCreate");
 	}
 	
 	private Button button_calc;
@@ -35,6 +42,7 @@ public class Bmi extends ActionBarActivity {
 	
 	private void findViews()
 	{
+		Log.d(TAG, "find Views");
 		button_calc = (Button) findViewById(R.id.submit);
 		fieldheight = (EditText) findViewById(R.id.height);
 		fieldweight = (EditText) findViewById(R.id.weight);
@@ -44,6 +52,7 @@ public class Bmi extends ActionBarActivity {
 	
 	private void setListensers()
 	{
+		Log.d(TAG, "set Listeners");
 		button_calc.setOnClickListener((android.view.View.OnClickListener) calcBMI);
 	}
 		
@@ -155,5 +164,57 @@ public class Bmi extends ActionBarActivity {
 			break;
 		}
 		return true;
+	}
+
+	// Restore preferences
+	private void restorePrefs()
+	{
+		SharedPreferences setting = getSharedPreferences(PREF, 0);
+		String pref_height = setting.getString(PREF_HEIGHT, "");
+		if(! "".equals(pref_height))
+		{
+			fieldheight.setText(pref_height);
+			fieldweight.requestFocus();
+		}
+	}
+	
+	public void onStart()
+	{
+		super.onStart();
+		Log.v(TAG, "onStart");
+	}
+	
+	public void OnResume()
+	{
+		super.onResume();
+		Log.v(TAG, "onResume");
+	}
+	
+	public void OnPause()
+	{
+		super.onPause();
+		Log.v(TAG, "onPause");
+	}
+	
+	public void onStop()
+	{
+		super.onStop();
+		SharedPreferences settings = getSharedPreferences(PREF, 0);
+		settings.edit()
+		.putString(PREF_HEIGHT, fieldheight.getText().toString())
+		.commit();
+		Log.v(TAG, "onStop");
+	}
+	
+	public void onRestart()
+	{
+		super.onRestart();
+		Log.v(TAG, "onRestart");
+	}
+	
+	public void onDestroy()
+	{
+		super.onDestroy();
+		Log.v(TAG, "onDestroy");
 	}
 }
