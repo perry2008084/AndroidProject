@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">猜数游戏</string>
+    <string name="action_settings">Settings</string>
+    <string name="input_num">输入数字</string>
+    <string name="result">猜测结果</string>
+    <string name="submit">提交</string>
+
+</resources>
