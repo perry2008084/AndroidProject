@@ -1,9 +1,11 @@
 package com.bookcell;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.app.ActionBar;
 
 
 public class scan extends Activity {
@@ -12,6 +14,10 @@ public class scan extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
     }
 
 
@@ -30,6 +36,12 @@ public class scan extends Activity {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
+        }
+        else if(item.getItemId() == android.R.id.home) {
+            //Up按钮的点击事件
+            Intent intent = new Intent();
+            intent.setClass(scan.this, homepage.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/title_activity_scan"
-            />
+            android:onClick="onBtnScanClick" />
 
         <Button
             android:id="@+id/btnSearch"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/title_activity_search"
-            />
+            android:onClick="onBtnSearchClick" />
 
     </LinearLayout>
 

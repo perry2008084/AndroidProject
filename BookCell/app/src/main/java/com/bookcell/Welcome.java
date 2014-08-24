@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.content.Intent;
 
 
 public class Welcome extends Activity {
@@ -31,5 +33,11 @@ public class Welcome extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void startClick(View v) {
+        Intent intent = new Intent();
+        intent.setClass(Welcome.this, homepage.class);
+        startActivity(intent);
     }
 }
