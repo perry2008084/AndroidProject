@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">书格</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">关于</string>
+    <string name="title_activity_homepage">首页</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_scan">扫描</string>
+    <string name="title_activity_search">搜索</string>
+    <string name="scan_hint">将条形码/二维码放入框框内，即可自动扫描信息</string>
+
+</resources>
