@@ -9,15 +9,16 @@ import android.widget.ListView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
+
+    String [] myStringArray = {"笑傲江湖", "连城诀", "天龙八部"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        String [] myStringArray = {"笑傲江湖", "连城诀", "天龙八部"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, myStringArray);
@@ -52,7 +53,7 @@ public class MainActivity extends Activity {
     private OnItemClickListener mMessageClickedHandler = new OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int position, long id) {
             // Do something in response to the click
-            System.out.print("hello");
+            Toast.makeText(getApplicationContext(), myStringArray[position], Toast.LENGTH_SHORT).show();
         }
     };
 
