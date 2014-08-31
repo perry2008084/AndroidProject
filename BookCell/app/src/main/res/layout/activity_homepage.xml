@@ -34,16 +34,25 @@
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/list_view_describe"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Test Android ListView"/>
 
         <ListView
-            android:id="@+id/lv_homepage"
+            android:id="@+id/listView_homepage"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
+        </ListView>
 
-         </ListView>
-     </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>
