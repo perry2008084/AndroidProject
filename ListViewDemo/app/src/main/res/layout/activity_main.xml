@@ -6,6 +6,7 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/list_view_describe"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Test Android ListView"/>
