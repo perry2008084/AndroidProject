@@ -20,11 +20,12 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.zxing.ResultMetadataType;
+import com.google.zxing.Result;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends DecoderActivity {
 
-    private static final String TAG = CaptureActivity.class.getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
     private static final Set<ResultMetadataType> DISPLAYABLE_METADATA_TYPES = EnumSet.of(ResultMetadataType.ISSUE_NUMBER, ResultMetadataType.SUGGESTED_PRICE,
             ResultMetadataType.ERROR_CORRECTION_LEVEL, ResultMetadataType.POSSIBLE_COUNTRY);
 
@@ -35,7 +36,7 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        setContentView(R.layout.capture);
+        setContentView(R.layout.activity_main);
         Log.v(TAG, "onCreate()");
 
         resultView = findViewById(R.id.result_view);
@@ -75,7 +76,7 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    public void handleDecode(Result rawResult, Bitmap barcode) {
+    public void handleDecode(com.google.zxing.Result rawResult, Bitmap barcode) {
         drawResultPoints(barcode, rawResult);
 
         com.bookcell.capturedecoder.result.ResultHandler resultHandler = com.bookcell.capturedecoder.result.ResultHandlerFactory.makeResultHandler(this, rawResult);
@@ -98,7 +99,7 @@ public class MainActivity extends Activity {
     }
 
     // Put up our own UI for how to handle the decodBarcodeFormated contents.
-    private void handleDecodeInternally(Result rawResult, com.bookcell.capturedecoder.result.ResultHandler resultHandler, Bitmap barcode) {
+    private void handleDecodeInternally(com.google.zxing.Result rawResult, com.bookcell.capturedecoder.result.ResultHandler resultHandler, Bitmap barcode) {
         onPause();
         showResults();
 
