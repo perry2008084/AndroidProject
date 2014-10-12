@@ -52,6 +52,9 @@
 
   <string name="barcode_image">Barcode Image</string>
 
+    <!--
+        自定义的字符串资源
+    -->
     <string name="app_name">书格</string>
     <string name="action_settings">Settings</string>
     <string name="action_about">关于</string>
@@ -60,5 +63,8 @@
     <string name="title_activity_scan">扫描</string>
     <string name="title_activity_search">搜索</string>
     <string name="scan_hint">将条形码/二维码放入框框内，即可自动扫描信息</string>
+
+    <item name="tag_first" type="id"></item>
+    <item name="tag_second" type="id"></item>
   
 </resources>
