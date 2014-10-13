@@ -7,11 +7,18 @@ public class BookInfo {
     private String name;
     private String describe;
     private int icon;
-    BookInfo(String Name,String Describe,int Icon)
+    private String bookPicturePath;
+    BookInfo(String Name,String Describe,int Icon, String bookpicPath)
     {
         name = Name;
         describe = Describe;
         icon = Icon;
+        bookPicturePath = bookpicPath;
+    }
+
+    BookInfo()
+    {
+
     }
 
     public String getName()
@@ -42,6 +49,13 @@ public class BookInfo {
     public void setDescribe(String describe)
     {
         this.describe = describe;
+    }
+
+    public String getBookPicturePath() {
+        return bookPicturePath;
+    }
+    public void setBookPicturePath(String bookPicturePath) {
+        this.bookPicturePath = bookPicturePath;
     }
 
 }
