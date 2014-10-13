@@ -25,8 +25,9 @@ android:paddingBottom="8dp">
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:textSize="20dp"
+            android:textSize="13dp"
             android:textColor="#cc487c"
+            android:singleLine="true"
             android:paddingLeft="10dp"
             />
 
@@ -34,9 +35,9 @@ android:paddingBottom="8dp">
             android:id="@+id/tv_message"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="14dp"
+            android:textSize="11dp"
             android:gravity="center_vertical"
-            android:singleLine="true"
+            android:singleLine="false"
             android:paddingLeft="10dp"
             />
 
