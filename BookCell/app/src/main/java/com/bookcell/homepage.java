@@ -205,7 +205,7 @@ public class homepage extends Activity {
                         protected List<BookInfo> doInBackground(Void... params) {
                             List<BookInfo> listNewBooks = null;
                             try {
-                                listNewBooks = NewBookDao.getAllNewBooks();
+                                listNewBooks = NewBookDao.getBooksMessage("1231576");
 
                             } catch (Exception e) {
                                 publishProgress("��ȡ����ʧ��,���Ժ����ԡ�����");
@@ -248,7 +248,7 @@ public class homepage extends Activity {
             protected List<BookInfo> doInBackground(Void... params) {
                 List<BookInfo> listNewBooks = null;
                 try {
-                    listNewBooks = NewBookDao.getAllNewBooks();
+                    listNewBooks = NewBookDao.getBooksMessage("1231576");
 
                 } catch (Exception e) {
                     publishProgress("��ȡ����ʧ��,���Ժ����ԡ�����");

@@ -9,36 +9,41 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.net.HttpURLConnection;
 
 import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.Source;
 
 public class NewBookDao {
-    public static List<BookInfo> getAllNewBooks() throws Exception{
+    public static List<BookInfo> getBooksMessage(String urlStr) throws Exception{
         List<BookInfo> list = new ArrayList<BookInfo>();
-        //URL url = new URL("http://book.douban.com/latest");
-        URL url = new URL("http://book.douban.com/subject/1231576/");
 
-        URLConnection conn = url.openConnection();
-        Source source = new Source(conn);
-        /*
-        List<Element> liList = source.getAllElements("li");
-        for(Element element:liList){
-            List<Element>  childrenList = element.getChildElements();
-            if(childrenList.size()==2&&"div".equals(childrenList.get(0).getName())&&"a".equals(childrenList.get(1).getName())){
-                BookInfo newBook = new BookInfo();
-                String name = childrenList.get(0).getAllElements().get(0).getTextExtractor().toString();
-                String message = childrenList.get(0).getAllElements().get(1).getTextExtractor().toString();
-                //String synopsis = childrenList.get(0).getAllElements().get(2).getTextExtractor().toString();
-                String path = childrenList.get(1).getAllElements().get(1).getAttributeValue("src");
-                newBook.setName(name);
-                newBook.setDescribe(message);
-                //newBook.setBookSynopsis(synopsis);
-                newBook.setBookPicturePath(path);
-                list.add(newBook);
-            }
-        }
-        */
+        //urlStr = "http://book.douban.com/isbn/9787040100952/";
+        urlStr = "http://book.douban.com/isbn/9787121148750/";
+
+        //Log.d("Com.Bookcell", "访问地址:" + urlStr);
+        URL serverUrl = new URL(urlStr);
+        HttpURLConnection conn = (HttpURLConnection) serverUrl
+                .openConnection();
+        conn.setRequestMethod("GET");
+        // 必须设置false，否则会自动redirect到Location的地址
+        conn.setInstanceFollowRedirects(false);
+        conn.connect();
+        String location = conn.getHeaderField("Location");
+
+        serverUrl = new URL(location);
+        conn = (HttpURLConnection) serverUrl.openConnection();
+        conn.setRequestMethod("GET");
+
+//        //URL url = new URL("http://book.douban.com/latest");
+//        String str = new String("http://book.douban.com/subject/");
+//        str += urlStr;
+//        str += "/";
+//        //URL url = new URL("http://book.douban.com/subject/1231576/");
+        URL url = new URL(location);
+
+        URLConnection connBook = url.openConnection();
+        Source source = new Source(connBook);
 
         BookInfo newBook = new BookInfo();
         List<Element> aList = source.getAllElements("a");
