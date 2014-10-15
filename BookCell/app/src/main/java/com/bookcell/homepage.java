@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -131,6 +132,8 @@ import java.io.IOException;
         import android.widget.Toast;
 
 public class homepage extends Activity {
+    private static final String TAG = homepage.class.getSimpleName();
+
     private ListView lv_main_books;//listView����
     private LinearLayout ll_loading;//������ʾ���ڼ��ص�progress
     private List<BookInfo> list;//Ҫ��ʾ���б�
@@ -139,17 +142,19 @@ public class homepage extends Activity {
     private boolean isloading = false;//�ж��Ƿ����ڼ�����
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.v(TAG, "onCreate()");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
         lv_main_books = (ListView) this.findViewById(R.id.listView_homepage);
         ll_loading = (LinearLayout) this.findViewById(R.id.ll_main_progress);
         list = new ArrayList<BookInfo>();
         adapter = new SubjectListAdapter();
-        //��һ�μ������
-        getData();
-        //lv_main_books��setOnScrollListener��Ҫ��ʵ������ķ�������ж��Ƿ��ڹ������Ƿ��Ѿ����������
+
+        getData("http://book.douban.com/isbn/9787121148750/");
+
         lv_main_books.setOnScrollListener(new AbsListView.OnScrollListener() {
-            //���ֲ�ͬ״̬
+
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 switch (scrollState) {
@@ -243,12 +248,13 @@ public class homepage extends Activity {
         });
     }
     //��ȡ��һ����ʾ�����
-    private void getData() {
+    private void getData(final String urlStr) {
+        Log.v(TAG, "getData()");
         new AsyncTask<Void, String, List<BookInfo>>() {
             protected List<BookInfo> doInBackground(Void... params) {
                 List<BookInfo> listNewBooks = null;
                 try {
-                    listNewBooks = NewBookDao.getBooksMessage("1231576");
+                    listNewBooks = NewBookDao.getBooksMessage(urlStr);
 
                 } catch (Exception e) {
                     publishProgress("��ȡ����ʧ��,���Ժ����ԡ�����");
@@ -355,7 +361,43 @@ public class homepage extends Activity {
         TextView tv_name;
         TextView tv_message;
         TextView tv_synopsis;
+    }
 
+    public void onBtnScanClick(View view) {
+        Intent intent = new Intent();
+        intent.setClass(homepage.this, scan.class);
+        startActivity(intent);
+    }
+
+    public void onBtnSearchClick(View view) {
+        Intent intent = new Intent();
+        intent.setClass(homepage.this, search.class);
+        startActivity(intent);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        Log.v(TAG, "onResume()");
+/*
+        Bundle bunde = this.getIntent().getBundleExtra("ISBN_INTENT");
+        String isbnStr = bunde.getString("ISBN_VALUE");
+        String urlStr = "http://book.douban.com/isbn/";
+        urlStr += isbnStr;
+        urlStr += "/";
+        getData(urlStr);
+*/
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.v(TAG, "onDestroy()");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.v(TAG, "onPause()");
     }
 
 }

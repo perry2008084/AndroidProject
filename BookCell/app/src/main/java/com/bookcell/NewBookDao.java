@@ -19,9 +19,8 @@ public class NewBookDao {
         List<BookInfo> list = new ArrayList<BookInfo>();
 
         //urlStr = "http://book.douban.com/isbn/9787040100952/";
-        urlStr = "http://book.douban.com/isbn/9787121148750/";
+        //urlStr = "http://book.douban.com/isbn/9787121148750/";
 
-        //Log.d("Com.Bookcell", "访问地址:" + urlStr);
         URL serverUrl = new URL(urlStr);
         HttpURLConnection conn = (HttpURLConnection) serverUrl
                 .openConnection();
@@ -35,11 +34,6 @@ public class NewBookDao {
         conn = (HttpURLConnection) serverUrl.openConnection();
         conn.setRequestMethod("GET");
 
-//        //URL url = new URL("http://book.douban.com/latest");
-//        String str = new String("http://book.douban.com/subject/");
-//        str += urlStr;
-//        str += "/";
-//        //URL url = new URL("http://book.douban.com/subject/1231576/");
         URL url = new URL(location);
 
         URLConnection connBook = url.openConnection();
@@ -49,7 +43,6 @@ public class NewBookDao {
         List<Element> aList = source.getAllElements("a");
         for(Element element:aList)
         {
-            //if(element.getClass().getName() == "nbg")
             if("nbg".equals(element.getAttributeValue("class")))
             {
                 String name = element.getAttributeValue("title");

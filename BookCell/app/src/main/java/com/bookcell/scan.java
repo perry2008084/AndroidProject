@@ -157,6 +157,13 @@ public class scan extends DecoderActivity {
         // Crudely scale betweeen 22 and 32 -- bigger font for shorter text
         int scaledSize = Math.max(22, 32 - displayContents.length() / 4);
         contentsTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, scaledSize);
+
+        Intent intent = new Intent();
+        intent.setClass(scan.this, homepage.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("ISBN_VALUE", contentsTextView.getText().toString());
+        intent.putExtra("ISBN_INTENT", bundle);
+        startActivity(intent);
     }
 
     @Override
