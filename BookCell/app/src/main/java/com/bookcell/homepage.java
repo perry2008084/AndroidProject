@@ -151,7 +151,7 @@ public class homepage extends Activity {
         list = new ArrayList<BookInfo>();
         adapter = new SubjectListAdapter();
 
-        getData("http://book.douban.com/isbn/9787121148750/");
+        //getData("http://book.douban.com/isbn/9787121148750/");
 
         lv_main_books.setOnScrollListener(new AbsListView.OnScrollListener() {
 
@@ -210,10 +210,10 @@ public class homepage extends Activity {
                         protected List<BookInfo> doInBackground(Void... params) {
                             List<BookInfo> listNewBooks = null;
                             try {
-                                listNewBooks = NewBookDao.getBooksMessage("1231576");
+                                //listNewBooks = NewBookDao.getBooksMessage("1231576");
 
                             } catch (Exception e) {
-                                publishProgress("��ȡ����ʧ��,���Ժ����ԡ�����");
+                                //publishProgress("��ȡ����ʧ��,���Ժ����ԡ�����");
                                 e.printStackTrace();
                             }
                             return listNewBooks;
@@ -226,13 +226,14 @@ public class homepage extends Activity {
                         }
 
                         protected void onPostExecute(List<BookInfo> result) {
+                            /*
                             list.addAll(result);
                             ll_loading.setVisibility(View.GONE);
-                            //System.out.println("����adapter");
                             adapter.notifyDataSetChanged();
-                            //System.out.println("һ����" + list.size() + "����");
+
                             isloading = false;
                             super.onPostExecute(result);
+                            */
                         }
 
                         protected void onProgressUpdate(String... values) {
@@ -378,14 +379,20 @@ public class homepage extends Activity {
     protected void onResume() {
         super.onResume();
         Log.v(TAG, "onResume()");
-/*
+
+        boolean isCameraRet = false;
         Bundle bunde = this.getIntent().getBundleExtra("ISBN_INTENT");
-        String isbnStr = bunde.getString("ISBN_VALUE");
-        String urlStr = "http://book.douban.com/isbn/";
-        urlStr += isbnStr;
-        urlStr += "/";
-        getData(urlStr);
-*/
+
+        if (bunde != null) {
+            isCameraRet = bunde.getBoolean("IS_CAMERA_RETURNED");
+            if (isCameraRet) {
+                String isbnStr = bunde.getString("ISBN_VALUE");
+                String urlStr = "http://book.douban.com/isbn/";
+                urlStr += isbnStr;
+                urlStr += "/";
+                getData(urlStr);
+            }
+        }
     }
 
     @Override

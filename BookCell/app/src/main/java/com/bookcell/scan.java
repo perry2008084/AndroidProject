@@ -161,9 +161,11 @@ public class scan extends DecoderActivity {
         Intent intent = new Intent();
         intent.setClass(scan.this, homepage.class);
         Bundle bundle = new Bundle();
+        bundle.putBoolean("IS_CAMERA_RETURNED", true);
         bundle.putString("ISBN_VALUE", contentsTextView.getText().toString());
         intent.putExtra("ISBN_INTENT", bundle);
         startActivity(intent);
+        finish();
     }
 
     @Override
