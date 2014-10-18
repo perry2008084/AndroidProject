@@ -5,13 +5,10 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.content.Intent;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,124 +19,17 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-public class homepage extends Activity {
-
-    // for test
-    private TextView describe;
-    private ListView listView;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepage);
-
-        initAll();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.homepage, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void onBtnScanClick(View view) {
-        Intent intent = new Intent();
-        intent.setClass(homepage.this, scan.class);
-        startActivity(intent);
-    }
-
-    public void onBtnSearchClick(View view) {
-        Intent intent = new Intent();
-        intent.setClass(homepage.this, search.class);
-        startActivity(intent);
-    }
-
-    public void initAll() {
-        describe = (TextView)findViewById(R.id.list_view_describe);
-        listView = (ListView)findViewById(R.id.listView_homepage);
-        describe.setText("书格清单");
-        ArrayList<com.bookcell.BookInfo> bookInfoArrayList = new ArrayList<com.bookcell.BookInfo>();
-        bookInfoArrayList.add(new com.bookcell.BookInfo("阿潘", "China", R.drawable.icon_1, ""));
-        bookInfoArrayList.add(new com.bookcell.BookInfo("鱼仔", "China", R.drawable.icon_2, ""));
-        bookInfoArrayList.add(new com.bookcell.BookInfo("Totoro", "Japan", R.drawable.icon_3, ""));
-        BookAdapter myAdapter = new BookAdapter(this,bookInfoArrayList);
-        listView.setAdapter(myAdapter);
-
-        listView.setOnItemClickListener(mMessageClickedHandler);
-    }
-
-    // Create a message handling object as an anonymous class.
-    private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
-        public void onItemClick(AdapterView parent, View v, int position, long id) {
-            // Do something in response to the click
-            TextView textView = (TextView) v.findViewById( R.id.tv_name );
-            toast( (String) textView.getText());
-        }
-    };
-
-    private void toast( String text )
-    {
-        Toast.makeText( getApplicationContext(),
-                String.format( "Item clicked: %s", text ), Toast.LENGTH_SHORT )
-                .show();
-    }
-}
-*/
-
-import java.io.IOException;
-
-        import java.io.InputStream;
-        import java.net.MalformedURLException;
-        import java.net.URL;
-        import java.net.URLConnection;
-        import java.util.ArrayList;
-        import java.util.List;
-
-        import com.bookcell.AsyncImageLoader.ImageCallback;
-
-        import android.app.Activity;
-        import android.app.ProgressDialog;
-        import android.content.Context;
-        import android.graphics.Bitmap;
-        import android.graphics.BitmapFactory;
-        import android.graphics.drawable.Drawable;
-        import android.os.AsyncTask;
-        import android.os.Bundle;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.AbsListView;
-        import android.widget.AbsListView.OnScrollListener;
-        import android.widget.BaseAdapter;
-        import android.widget.ImageView;
-        import android.widget.LinearLayout;
-        import android.widget.ListView;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import com.bookcell.AsyncImageLoader.ImageCallback;
 
 public class homepage extends Activity {
     private static final String TAG = homepage.class.getSimpleName();
 
-    private ListView lv_main_books;//listView����
-    private LinearLayout ll_loading;//������ʾ���ڼ��ص�progress
-    private List<BookInfo> list;//Ҫ��ʾ���б�
-    private boolean isScrolling = false;//�Ƿ����ڹ���
-    private SubjectListAdapter adapter;//���������
-    private boolean isloading = false;//�ж��Ƿ����ڼ�����
+    private ListView lv_main_books;
+    private LinearLayout ll_loading;
+    private List<BookInfo> list;
+    private boolean isScrolling = false;
+    private SubjectListAdapter adapter;
+    private boolean isloading = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.v(TAG, "onCreate()");
@@ -234,6 +124,7 @@ public class homepage extends Activity {
                             isloading = false;
                             super.onPostExecute(result);
                             */
+                            isloading = false;
                         }
 
                         protected void onProgressUpdate(String... values) {
@@ -255,6 +146,7 @@ public class homepage extends Activity {
             protected List<BookInfo> doInBackground(Void... params) {
                 List<BookInfo> listNewBooks = null;
                 try {
+                    Log.v(TAG, "NewBookDao.getBooksMessage() urlStr: " + urlStr);
                     listNewBooks = NewBookDao.getBooksMessage(urlStr);
 
                 } catch (Exception e) {
@@ -405,6 +297,13 @@ public class homepage extends Activity {
     protected void onPause() {
         super.onPause();
         Log.v(TAG, "onPause()");
+    }
+
+    private void toast( String text )
+    {
+        Toast.makeText( getApplicationContext(),
+                String.format( "Item clicked: %s", text ), Toast.LENGTH_SHORT )
+                .show();
     }
 
 }

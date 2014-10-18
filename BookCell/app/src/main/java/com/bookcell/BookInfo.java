@@ -25,7 +25,6 @@ public class BookInfo {
     {
         return name;
     }
-
     public void setName(String name)
     {
         this.name = name;
@@ -35,7 +34,6 @@ public class BookInfo {
     {
         return icon;
     }
-
     public void setIcon(int icon)
     {
         this.icon = icon;
@@ -45,7 +43,6 @@ public class BookInfo {
     {
         return describe;
     }
-
     public void setDescribe(String describe)
     {
         this.describe = describe;
