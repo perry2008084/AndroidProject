@@ -4,16 +4,25 @@ package com.bookcell;
  * Created by perry on 2014/8/31.
  */
 public class BookInfo {
-    private String name;
-    private String describe;
+    private String bookISBN;
+    private String bookName;
+    private String bookAuthor;
+    private String bookPub;
+    private String bookPosition;
+    private String bookDescribe;
     private int icon;
     private String bookPicturePath;
+
     BookInfo(String Name,String Describe,int Icon, String bookpicPath)
     {
-        name = Name;
-        describe = Describe;
+        bookName = Name;
+        bookDescribe = Describe;
         icon = Icon;
         bookPicturePath = bookpicPath;
+        bookISBN = "";
+        bookAuthor = "";
+        bookPub = "";
+        bookPosition = "";
     }
 
     BookInfo()
@@ -21,13 +30,49 @@ public class BookInfo {
 
     }
 
+    public String getBookISBN()
+    {
+        return bookISBN;
+    }
+    public void setName(String bookISBN)
+    {
+        this.bookISBN = bookISBN;
+    }
+
     public String getName()
     {
-        return name;
+        return bookName;
     }
-    public void setName(String name)
+    public void setName(String bookName)
     {
-        this.name = name;
+        this.bookName = bookName;
+    }
+
+    public String getBookAuthor()
+    {
+        return bookAuthor;
+    }
+    public void setName(String bookAuthor)
+    {
+        this.bookAuthor = bookAuthor;
+    }
+
+    public String getBookPub()
+    {
+        return bookPub;
+    }
+    public void setName(String bookPub)
+    {
+        this.bookPub = bookPub;
+    }
+
+    public String getBookPosition()
+    {
+        return bookPosition;
+    }
+    public void setName(String bookPosition)
+    {
+        this.bookPosition = bookPosition;
     }
 
     public int getIcon()
@@ -41,11 +86,11 @@ public class BookInfo {
 
     public String getDescribe()
     {
-        return describe;
+        return bookDescribe;
     }
-    public void setDescribe(String describe)
+    public void setDescribe(String bookDescribe)
     {
-        this.describe = describe;
+        this.bookDescribe = bookDescribe;
     }
 
     public String getBookPicturePath() {

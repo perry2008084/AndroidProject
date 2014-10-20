@@ -162,10 +162,19 @@ public class homepage extends Activity {
             }
 
             protected void onPostExecute(List<BookInfo> result) {
+                /*
                 list=result;
                 ll_loading.setVisibility(View.GONE);
                 lv_main_books.setAdapter(adapter);
                 //System.out.println("һ����" + list.size() + "����");
+                super.onPostExecute(result);
+                */
+
+                list.addAll(result);
+                ll_loading.setVisibility(View.GONE);
+                lv_main_books.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
                 super.onPostExecute(result);
             }
 
@@ -198,7 +207,6 @@ public class homepage extends Activity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-
             View view = null;
             ViewCache viewCache;
             ViewHolder viewHolder = null;
