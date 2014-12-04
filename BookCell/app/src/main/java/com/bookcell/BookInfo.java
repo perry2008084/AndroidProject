@@ -4,6 +4,7 @@ package com.bookcell;
  * Created by perry on 2014/8/31.
  */
 public class BookInfo {
+    private int _id;
     private String bookISBN;
     private String bookName;
     private String bookAuthor;
@@ -25,16 +26,36 @@ public class BookInfo {
         bookPosition = "";
     }
 
+    BookInfo(int id, String isbn, String Name, String author, String pub, String position, String Describe)
+    {
+        _id = id;
+        bookISBN = isbn;
+        bookName = Name;
+        bookAuthor = author;
+        bookPub = pub;
+        bookPosition = position;
+        bookDescribe = Describe;
+    }
+
     BookInfo()
     {
 
+    }
+
+    public int getID()
+    {
+        return _id;
+    }
+    public void setID(int id)
+    {
+        this._id = id;
     }
 
     public String getBookISBN()
     {
         return bookISBN;
     }
-    public void setName(String bookISBN)
+    public void setBookISBN(String bookISBN)
     {
         this.bookISBN = bookISBN;
     }
@@ -52,7 +73,7 @@ public class BookInfo {
     {
         return bookAuthor;
     }
-    public void setName(String bookAuthor)
+    public void setBookAuthor(String bookAuthor)
     {
         this.bookAuthor = bookAuthor;
     }
@@ -61,7 +82,7 @@ public class BookInfo {
     {
         return bookPub;
     }
-    public void setName(String bookPub)
+    public void setBookPub(String bookPub)
     {
         this.bookPub = bookPub;
     }
@@ -70,7 +91,7 @@ public class BookInfo {
     {
         return bookPosition;
     }
-    public void setName(String bookPosition)
+    public void setBookPosition(String bookPosition)
     {
         this.bookPosition = bookPosition;
     }
