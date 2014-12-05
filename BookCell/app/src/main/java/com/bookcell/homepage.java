@@ -85,7 +85,7 @@ public class homepage extends Activity {
                         break;
                 }
             }
-            //�Ƿ��ѵ����
+
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem,
                                  int visibleItemCount, int totalItemCount) {
@@ -103,7 +103,6 @@ public class homepage extends Activity {
                                 //listNewBooks = NewBookDao.getBooksMessage("1231576");
 
                             } catch (Exception e) {
-                                //publishProgress("��ȡ����ʧ��,���Ժ����ԡ�����");
                                 e.printStackTrace();
                             }
                             return listNewBooks;
@@ -139,7 +138,7 @@ public class homepage extends Activity {
             }
         });
     }
-    //��ȡ��һ����ʾ�����
+
     private void getData(final String urlStr) {
         Log.v(TAG, "getData()");
         new AsyncTask<Void, String, List<BookInfo>>() {
@@ -150,7 +149,6 @@ public class homepage extends Activity {
                     listNewBooks = NewBookDao.getBooksMessage(urlStr);
 
                 } catch (Exception e) {
-                    publishProgress("��ȡ����ʧ��,���Ժ����ԡ�����");
                     e.printStackTrace();
                 }
                 return listNewBooks;
@@ -231,9 +229,9 @@ public class homepage extends Activity {
             String imgUrl = newBook.getBookPicturePath();
             ImageView imgBook = viewCache.getImageView();
             imgBook.setTag(imgUrl);
-            if(isScrolling){//����ʽ���ر��صļ�ͼƬ
+            if(isScrolling){
                 imgBook.setImageResource(R.drawable.ic_launcher);
-            }else{//��ֹʱ�������ϵ���ͼƬ
+            }else{
                 Drawable drawable = NetUtil.asyncImageLoader.loadDrawable(imgUrl,
                         new ImageCallback() {
                             public void imageLoaded(Drawable imageDrawable,
