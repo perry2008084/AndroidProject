@@ -27,9 +27,12 @@ public class homepage extends Activity {
     private ListView lv_main_books;
     private LinearLayout ll_loading;
     private List<BookInfo> list;
-    private boolean isScrolling = false;
     private SubjectListAdapter adapter;
+    DatabaseHandler db;
+
+    private boolean isScrolling = false;
     private boolean isloading = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.v(TAG, "onCreate()");
@@ -40,6 +43,8 @@ public class homepage extends Activity {
         ll_loading = (LinearLayout) this.findViewById(R.id.ll_main_progress);
         list = new ArrayList<BookInfo>();
         adapter = new SubjectListAdapter();
+
+        Set_Referash_Data();
 
         //getData("http://book.douban.com/isbn/9787121148750/");
 
@@ -291,6 +296,8 @@ public class homepage extends Activity {
                 getData(urlStr);
             }
         }
+
+        Set_Referash_Data();
     }
 
     @Override
@@ -303,6 +310,36 @@ public class homepage extends Activity {
     protected void onPause() {
         super.onPause();
         Log.v(TAG, "onPause()");
+    }
+
+    public void Set_Referash_Data() {
+        list.clear();
+        db = new DatabaseHandler(this);
+        ArrayList<BookInfo> bookInfo_array_from_db = db.Get_BookInfos();
+
+        for (int i = 0; i < bookInfo_array_from_db.size(); i++) {
+
+            int tidno = bookInfo_array_from_db.get(i).getID();
+            String isbn = bookInfo_array_from_db.get(i).getBookISBN();
+            String name = bookInfo_array_from_db.get(i).getName();
+            String author = bookInfo_array_from_db.get(i).getBookAuthor();
+            String pub = bookInfo_array_from_db.get(i).getBookPub();
+            String position = bookInfo_array_from_db.get(i).getBookPosition();
+            String describe = bookInfo_array_from_db.get(i).getDescribe();
+            BookInfo bInfo = new BookInfo();
+            bInfo.setID(tidno);
+            bInfo.setBookISBN(isbn);
+            bInfo.setName(name);
+            bInfo.setBookAuthor(author);
+            bInfo.setBookPub(pub);
+            bInfo.setBookPosition(position);
+            bInfo.setDescribe(describe);
+
+            list.add(bInfo);
+        }
+        db.close();
+        lv_main_books.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     private void toast( String text )
