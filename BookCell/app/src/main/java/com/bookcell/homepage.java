@@ -1,6 +1,8 @@
 package com.bookcell;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,28 +12,36 @@ import android.content.Intent;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.bookcell.AsyncImageLoader.ImageCallback;
 
-public class homepage extends Activity {
+public class homepage extends Activity implements View.OnClickListener {
     private static final String TAG = homepage.class.getSimpleName();
 
     private ListView lv_main_books;
     private LinearLayout ll_loading;
+    private Button cancel,delete,edit;
     private List<BookInfo> list;
+    private List<BookInfo> selectid;
+    private RelativeLayout layout;
     private SubjectListAdapter adapter;
     DatabaseHandler db;
 
     private boolean isScrolling = false;
     private boolean isloading = false;
+    private boolean isMulChoice = false; // 是否为多选
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,8 +51,17 @@ public class homepage extends Activity {
         setContentView(R.layout.activity_homepage);
         lv_main_books = (ListView) this.findViewById(R.id.listView_homepage);
         ll_loading = (LinearLayout) this.findViewById(R.id.ll_main_progress);
+        layout = (RelativeLayout) this.findViewById(R.id.relative);
+        cancel = (Button)findViewById(R.id.cancle);
+        edit = (Button)findViewById(R.id.edit);
+        delete = (Button)findViewById(R.id.delete);
+        cancel.setOnClickListener(this);
+        edit.setOnClickListener(this);
+        delete.setOnClickListener(this);
+
         list = new ArrayList<BookInfo>();
-        adapter = new SubjectListAdapter();
+        selectid = new ArrayList<BookInfo>();
+        //adapter = new SubjectListAdapter();
 
         Set_Referash_Data();
 
@@ -144,6 +163,35 @@ public class homepage extends Activity {
         });
     }
 
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.cancle:
+                isMulChoice = false;
+                selectid.clear();
+                adapter = new SubjectListAdapter();
+                lv_main_books.setAdapter(adapter);
+                layout.setVisibility(View.INVISIBLE);
+                break;
+            case R.id.edit:
+                break;
+            case R.id.delete:
+                isMulChoice = false;
+                for (int i = 0; i < selectid.size(); i++) {
+                    for (int j = 0; j < list.size(); j++) {
+                        if (selectid.get(i).getID() == list.get(j).getID()) {
+                            list.remove(j);
+                        }
+                    }
+                }
+                selectid.clear();
+                adapter = new SubjectListAdapter();
+                lv_main_books.setAdapter(adapter);
+                layout.setVisibility(View.INVISIBLE);
+            default:
+                break;
+        }
+    }
+
     private void getData(final String urlStr) {
         Log.v(TAG, "getData()");
         new AsyncTask<Void, String, List<BookInfo>>() {
@@ -173,10 +221,18 @@ public class homepage extends Activity {
                 super.onPostExecute(result);
                 */
 
-                list.addAll(result);
-                ll_loading.setVisibility(View.GONE);
-                lv_main_books.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                if (result.size() > 0)
+                {
+                    list.addAll(result);
+                    ll_loading.setVisibility(View.GONE);
+                    lv_main_books.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+
+                    db.Add_BookInfo(result.get(0));
+                    String Toast_msg = "Data inserted successfully";
+                    toast(Toast_msg);
+                }
+
 
                 super.onPostExecute(result);
             }
@@ -190,6 +246,28 @@ public class homepage extends Activity {
         }.execute();
     }
     private class SubjectListAdapter extends BaseAdapter {
+        private HashMap<Integer, View> mView;
+        private HashMap<Integer, Integer> visiblecheck;  // 记录是否显示checkbox
+        private HashMap<Integer, Boolean> ischeck;
+
+        public SubjectListAdapter()
+        {
+            visiblecheck = new HashMap<Integer, Integer>();
+            ischeck      = new HashMap<Integer, Boolean>();
+
+            if (isMulChoice) {
+                for(int i = 0; i < list.size(); i++) {
+                    ischeck.put(i, false);
+                    visiblecheck.put(i, CheckBox.VISIBLE);
+                }
+            }
+            else {
+                for(int i = 0; i < list.size(); i++) {
+                    ischeck.put(i, false);
+                    visiblecheck.put(i, CheckBox.INVISIBLE);
+                }
+            }
+        }
 
         @Override
         public int getCount() {
@@ -209,9 +287,10 @@ public class homepage extends Activity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            //View view = mView.get(position);
             View view = null;
-            ViewCache viewCache;
+            com.bookcell.ViewCache viewCache;
             ViewHolder viewHolder = null;
             if (convertView == null) {
                 viewHolder = new ViewHolder();
@@ -222,6 +301,33 @@ public class homepage extends Activity {
                 viewHolder.tv_message = (TextView) view.findViewById(R.id.tv_message);
                 viewHolder.tv_synopsis = (TextView) view.findViewById(R.id.tv_synopsis);
                 view.setTag(R.id.tag_second,viewHolder);
+
+                final CheckBox ceb = (CheckBox)view.findViewById(R.id.check);
+                ceb.setChecked(ischeck.get(position));
+                ceb.setVisibility(visiblecheck.get(position));
+
+                view.setOnLongClickListener(new Onlongclick());
+
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(isMulChoice) {
+                            if(ceb.isChecked()) {
+                                ceb.setChecked(false);
+                                selectid.remove(list.get(position));
+                            }
+                            else{
+                                ceb.setChecked(true);
+                                selectid.add(list.get(position));
+                            }
+                        }
+                        else {
+                            toast("点击了"+list.get(position));
+                        }
+                    }
+                });
+
+               // mView.put(position, view);
             } else {
                 view = convertView;
                 viewHolder = (ViewHolder) view.getTag(R.id.tag_second);
@@ -257,6 +363,21 @@ public class homepage extends Activity {
             }
 
             return view;
+        }
+
+        class Onlongclick implements View.OnLongClickListener{
+            public boolean onLongClick(View v) {
+                isMulChoice = true;
+                selectid.clear();
+                layout.setVisibility(View.VISIBLE);
+                for (int i = 0; i < list.size(); i++) {
+                    adapter.visiblecheck.put(i, CheckBox.VISIBLE);
+                }
+
+                adapter = new SubjectListAdapter();
+                lv_main_books.setAdapter(adapter);
+                return true;
+            }
         }
 
     }

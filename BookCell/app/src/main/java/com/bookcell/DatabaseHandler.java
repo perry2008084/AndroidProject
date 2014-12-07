@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
+    private static final String TAG = DatabaseHandler.class.getSimpleName();
 
     // All Static variables
     // Database Version
@@ -72,6 +73,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	// Inserting Row
 	db.insert(TABLE_BOOKCELL, null, values);
+    Log.d(TAG, "Add_BookInfo() bookInfo KEY_ISBN: " + bookInfo.getBookISBN());
 	db.close(); // Closing database connection
     }
 
