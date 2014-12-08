@@ -63,6 +63,7 @@ public class homepage extends Activity implements View.OnClickListener {
         selectid = new ArrayList<BookInfo>();
         //adapter = new SubjectListAdapter();
 
+        Log.v(TAG, "onCreate() Set_Referash_Data()");
         Set_Referash_Data();
 
         //getData("http://book.douban.com/isbn/9787121148750/");
@@ -418,6 +419,7 @@ public class homepage extends Activity implements View.OnClickListener {
             }
         }
 
+        Log.v(TAG, "onResume() Set_Referash_Data()");
         Set_Referash_Data();
     }
 
@@ -459,6 +461,7 @@ public class homepage extends Activity implements View.OnClickListener {
             list.add(bInfo);
         }
         db.close();
+        adapter = new SubjectListAdapter();
         lv_main_books.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
