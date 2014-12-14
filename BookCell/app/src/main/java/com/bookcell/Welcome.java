@@ -13,6 +13,7 @@ import android.content.Intent;
 public class Welcome extends Activity {
     private static final String TAG = Welcome.class.getSimpleName();
     private boolean m_bIsFirstStartup = true;
+    private boolean m_bIsDeletingItem = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +23,12 @@ public class Welcome extends Activity {
 
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         m_bIsFirstStartup = sharedPref.getBoolean(getString(R.string.isFirstTimeStartup), true);
-        if (!m_bIsFirstStartup) {
-            Intent intent = new Intent();
-            intent.setClass(Welcome.this, homepage.class);
-            startActivity(intent);
+
+        SharedPreferences sharedPrefAll = getSharedPreferences(getString(R.string.bookcellPreferenceFile), Context.MODE_PRIVATE);
+        m_bIsDeletingItem = sharedPrefAll.getBoolean(getString(R.string.isDeletingItem), false);
+
+        if (!m_bIsFirstStartup || m_bIsDeletingItem) {
+            jumpToHomePage();
         }
     }
 
@@ -49,6 +52,10 @@ public class Welcome extends Activity {
     }
 
     public void startClick(View v) {
+        jumpToHomePage();
+    }
+
+    public void jumpToHomePage() {
         Intent intent = new Intent();
         intent.setClass(Welcome.this, homepage.class);
         startActivity(intent);
@@ -58,9 +65,15 @@ public class Welcome extends Activity {
         super.onResume();
         Log.v(TAG, "onResume()");
 
-        if (!m_bIsFirstStartup) {
+        SharedPreferences sharedPrefAll = getSharedPreferences(getString(R.string.bookcellPreferenceFile), Context.MODE_PRIVATE);
+        m_bIsDeletingItem = sharedPrefAll.getBoolean(getString(R.string.isDeletingItem), false);
+
+        if (!m_bIsFirstStartup && !m_bIsDeletingItem) {
             finish();
             Log.v(TAG, "onResume() call finish()");
+        }
+        else if (m_bIsDeletingItem) {
+            jumpToHomePage();
         }
     }
 

@@ -3,6 +3,7 @@ package com.bookcell;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class homepage extends Activity implements View.OnClickListener {
     private ListView lv_main_books;
     private LinearLayout ll_loading;
     private Button cancel,delete,edit;
+    private TextView txtcount;
     private List<BookInfo> list;
     private List<BookInfo> selectid;
     private RelativeLayout layout;
@@ -52,6 +54,7 @@ public class homepage extends Activity implements View.OnClickListener {
         lv_main_books = (ListView) this.findViewById(R.id.listView_homepage);
         ll_loading = (LinearLayout) this.findViewById(R.id.ll_main_progress);
         layout = (RelativeLayout) this.findViewById(R.id.relative);
+        txtcount = (TextView) this.findViewById(R.id.txtcount);
         cancel = (Button)findViewById(R.id.cancle);
         edit = (Button)findViewById(R.id.edit);
         delete = (Button)findViewById(R.id.delete);
@@ -324,6 +327,8 @@ public class homepage extends Activity implements View.OnClickListener {
                                 ceb.setChecked(true);
                                 selectid.add(list.get(position));
                             }
+
+                            txtcount.setText( "共计 " + selectid.size() + " 项");
                         }
                         else {
                             toast("点击了"+list.get(position));
@@ -439,6 +444,18 @@ public class homepage extends Activity implements View.OnClickListener {
     protected void onPause() {
         super.onPause();
         Log.v(TAG, "onPause() click the return button?");
+
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.bookcellPreferenceFile), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        if (isMulChoice) {
+            editor.putBoolean(getString(R.string.isDeletingItem), true);
+            editor.commit();
+        }
+        else {
+            editor.putBoolean(getString(R.string.isDeletingItem), false);
+            editor.commit();
+        }
     }
 
     public void Set_Referash_Data() {

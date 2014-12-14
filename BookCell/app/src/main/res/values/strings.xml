@@ -68,5 +68,7 @@
     <item name="tag_second" type="id"></item>
 
     <string name="isFirstTimeStartup">IsFirstTimeStartup</string>
-  
+    <string name="isDeletingItem">IsDeletingItem</string>
+    <string name="bookcellPreferenceFile">BookcellPreferenceFile</string>
+
 </resources>

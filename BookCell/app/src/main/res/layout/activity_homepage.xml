@@ -92,7 +92,7 @@
             android:id="@+id/txtcount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="共计"
+            android:text="共计 0 项"
             android:textSize="15sp"
             android:layout_centerInParent="true"
 
