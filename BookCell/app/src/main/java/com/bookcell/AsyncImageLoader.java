@@ -37,7 +37,6 @@ public class AsyncImageLoader {
         new Thread() {
             @Override
             public void run() {
-                //System.out.println("�����ش�Ƭ");
                 Drawable drawable = loadImageFromUrl(imageUrl);
                 imageCache.put(imageUrl, new SoftReference<Drawable>(drawable));
                 Message message = handler.obtainMessage(0, drawable);

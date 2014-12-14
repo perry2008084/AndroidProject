@@ -134,8 +134,8 @@ public class homepage extends Activity implements View.OnClickListener {
                         }
 
                         protected void onPreExecute() {
-                            ll_loading.setVisibility(View.VISIBLE);
-                            isloading = true;
+                           // ll_loading.setVisibility(View.VISIBLE);
+                           // isloading = true;
                             super.onPreExecute();
                         }
 
@@ -180,6 +180,9 @@ public class homepage extends Activity implements View.OnClickListener {
                 for (int i = 0; i < selectid.size(); i++) {
                     for (int j = 0; j < list.size(); j++) {
                         if (selectid.get(i).getID() == list.get(j).getID()) {
+
+                            // delete from database
+                            db.Delete_BookInfo(list.get(j).getID());
                             list.remove(j);
                         }
                     }
@@ -344,23 +347,25 @@ public class homepage extends Activity implements View.OnClickListener {
             if(isScrolling){
                 imgBook.setImageResource(R.drawable.ic_launcher);
             }else{
-                Drawable drawable = NetUtil.asyncImageLoader.loadDrawable(imgUrl,
-                        new ImageCallback() {
-                            public void imageLoaded(Drawable imageDrawable,
-                                                    String imageUrl) {
-                                ImageView imageViewByTag = (ImageView) lv_main_books
-                                        .findViewWithTag(imageUrl);
-                                if (imageViewByTag != null) {
-                                    imageViewByTag.setImageDrawable(imageDrawable);
-                                }
-                            }
-                        });
+//                Drawable drawable = NetUtil.asyncImageLoader.loadDrawable(imgUrl,
+//                        new ImageCallback() {
+//                            public void imageLoaded(Drawable imageDrawable,
+//                                                    String imageUrl) {
+//                                ImageView imageViewByTag = (ImageView) lv_main_books
+//                                        .findViewWithTag(imageUrl);
+//                                if (imageViewByTag != null) {
+//                                    imageViewByTag.setImageDrawable(imageDrawable);
+//                                }
+//                            }
+//                        });
+//
+//                if (drawable != null) {
+//                    imgBook.setImageDrawable(drawable);
+//                } else {
+//                    imgBook.setImageResource(R.drawable.ic_launcher);
+//                }
 
-                if (drawable != null) {
-                    imgBook.setImageDrawable(drawable);
-                } else {
-                    imgBook.setImageResource(R.drawable.ic_launcher);
-                }
+                imgBook.setImageResource(R.drawable.ic_launcher);
             }
 
             return view;
@@ -368,6 +373,7 @@ public class homepage extends Activity implements View.OnClickListener {
 
         class Onlongclick implements View.OnLongClickListener{
             public boolean onLongClick(View v) {
+                Log.v(TAG, "onLongClick()");
                 isMulChoice = true;
                 selectid.clear();
                 layout.setVisibility(View.VISIBLE);

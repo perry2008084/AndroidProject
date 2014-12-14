@@ -6,7 +6,9 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
 
         <Button
             android:id="@+id/btnHomepage"
@@ -34,15 +36,11 @@
 
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-
-        <TextView
-            android:id="@+id/list_view_describe"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Test Android ListView"/>
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        >
 
         <ListView
             android:id="@+id/listView_homepage"
@@ -70,19 +68,17 @@
                 android:text="正在加载....." />
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <RelativeLayout
-
         android:id="@+id/relative"
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:gravity="bottom"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@color/lemonchiffon"
         android:visibility="gone"
         >
         <Button
-
             android:id="@+id/cancle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,7 +89,6 @@
 
             />
         <TextView
-
             android:id="@+id/txtcount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,17 +99,17 @@
             />
 
         <Button
-            android:id="@+id/edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="|  编辑"
-            android:textSize="20sp"
-            android:background="@null"
-            android:layout_centerVertical="true"
-            />
+        android:id="@+id/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="|  编辑"
+        android:textSize="20sp"
+        android:background="@null"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        />
 
         <Button
-
             android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
