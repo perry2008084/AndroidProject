@@ -66,5 +66,7 @@
 
     <item name="tag_first" type="id"></item>
     <item name="tag_second" type="id"></item>
+
+    <string name="isFirstTimeStartup">IsFirstTimeStartup</string>
   
 </resources>

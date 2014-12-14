@@ -438,7 +438,7 @@ public class homepage extends Activity implements View.OnClickListener {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.v(TAG, "onPause()");
+        Log.v(TAG, "onPause() click the return button?");
     }
 
     public void Set_Referash_Data() {
@@ -475,7 +475,7 @@ public class homepage extends Activity implements View.OnClickListener {
     private void toast( String text )
     {
         Toast.makeText( getApplicationContext(),
-                String.format( "Item clicked: %s", text ), Toast.LENGTH_SHORT )
+                text, Toast.LENGTH_SHORT )
                 .show();
     }
 
