@@ -165,7 +165,9 @@ public class scan extends DecoderActivity {
         bundle.putString("ISBN_VALUE", contentsTextView.getText().toString());
         intent.putExtra("ISBN_INTENT", bundle);
         startActivity(intent);
+        Log.v(TAG, "handleDecodeInternally() call finish() before.");
         finish();
+        Log.v(TAG, "handleDecodeInternally() after call finish().");
     }
 
     @Override

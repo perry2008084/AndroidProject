@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -238,9 +239,9 @@ public class homepage extends Activity implements View.OnClickListener {
                     db.Add_BookInfo(result.get(0));
                     String Toast_msg = "Data inserted successfully";
                     toast(Toast_msg);
+
+                    Set_Referash_Data();
                 }
-
-
                 super.onPostExecute(result);
             }
 
@@ -310,8 +311,14 @@ public class homepage extends Activity implements View.OnClickListener {
                 view.setTag(R.id.tag_second,viewHolder);
 
                 final CheckBox ceb = (CheckBox)view.findViewById(R.id.check);
-                ceb.setChecked(ischeck.get(position));
-                ceb.setVisibility(visiblecheck.get(position));
+                Log.w(TAG, "getView() position: " + position + " ischeck.size(): " + ischeck.size() + " ischeck.get(position): " + ischeck.get(position));
+                if (position < ischeck.size()) {
+                    ceb.setChecked(ischeck.get(position));
+                }
+                Log.w(TAG, "getView() position: " + position + " visiblecheck.size(): " + visiblecheck.size() + " visiblecheck.get(position): " + visiblecheck.get(position));
+                if (position < visiblecheck.size()) {
+                    ceb.setVisibility(visiblecheck.get(position));
+                }
 
                 view.setOnLongClickListener(new Onlongclick());
 
@@ -484,6 +491,7 @@ public class homepage extends Activity implements View.OnClickListener {
             list.add(bInfo);
         }
         db.close();
+        Log.i(TAG, "Set_Referash_Data() new SubjectListAdapter()");
         adapter = new SubjectListAdapter();
         lv_main_books.setAdapter(adapter);
         adapter.notifyDataSetChanged();
