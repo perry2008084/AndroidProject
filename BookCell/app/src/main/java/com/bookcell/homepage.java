@@ -428,8 +428,10 @@ public class homepage extends Activity implements View.OnClickListener {
 
         if (bunde != null) {
             isCameraRet = bunde.getBoolean("IS_CAMERA_RETURNED");
+            Log.i(TAG, "onResume isCameraRet: " + isCameraRet);
             if (isCameraRet) {
                 String isbnStr = bunde.getString("ISBN_VALUE");
+                Log.i(TAG, "onResume isbnStr: " + isbnStr);
                 String urlStr = "http://book.douban.com/isbn/";
                 urlStr += isbnStr;
                 urlStr += "/";

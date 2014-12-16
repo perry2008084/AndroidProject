@@ -1,6 +1,7 @@
 package com.bookcell;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -38,6 +39,7 @@ public class scan extends DecoderActivity {
     private TextView statusView = null;
     private View resultView = null;
     private boolean inScanMode = false;
+    private boolean isGetDecoderResult = false;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -59,6 +61,18 @@ public class scan extends DecoderActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.v(TAG, "onDestroy()");
+
+        if (!isGetDecoderResult) {
+            Intent intent = new Intent();
+            intent.setClass(scan.this, homepage.class);
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("IS_CAMERA_RETURNED", false);
+            bundle.putString("ISBN_VALUE", "");
+            Log.d(TAG, "handleDecodeInternally() ISBN_VALUE: " );
+            intent.putExtra("ISBN_INTENT", bundle);
+            startActivity(intent);
+        }
+
     }
 
     @Override
@@ -110,6 +124,8 @@ public class scan extends DecoderActivity {
 
     // Put up our own UI for how to handle the decodBarcodeFormated contents.
     private void handleDecodeInternally(com.google.zxing.Result rawResult, com.bookcell.result.ResultHandler resultHandler, Bitmap barcode) {
+        Log.d(TAG, "call handleDecodeInternally()");
+
         onPause();
         showResults();
 
@@ -163,8 +179,11 @@ public class scan extends DecoderActivity {
         Bundle bundle = new Bundle();
         bundle.putBoolean("IS_CAMERA_RETURNED", true);
         bundle.putString("ISBN_VALUE", contentsTextView.getText().toString());
+        Log.d(TAG, "handleDecodeInternally() ISBN_VALUE: " + contentsTextView.getText().toString());
         intent.putExtra("ISBN_INTENT", bundle);
         startActivity(intent);
+
+        isGetDecoderResult = true;
         Log.v(TAG, "handleDecodeInternally() call finish() before.");
         finish();
         Log.v(TAG, "handleDecodeInternally() after call finish().");
