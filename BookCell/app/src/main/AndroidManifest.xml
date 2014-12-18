@@ -48,6 +48,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.bookcell.homepage" />
         </activity>
+        
+        <activity android:name=".BookDetail"
+            android:label="@string/app_name"
+            android:parentActivityName=".homepage">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.bookcell.home" />
+        </activity>
     </application>
 
 </manifest>

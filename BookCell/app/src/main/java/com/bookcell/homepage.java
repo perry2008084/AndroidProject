@@ -338,7 +338,10 @@ public class homepage extends Activity implements View.OnClickListener {
                             txtcount.setText( "共计 " + selectid.size() + " 项");
                         }
                         else {
-                            toast("点击了"+list.get(position));
+                            //toast("点击了"+list.get(position));
+                            Intent intent = new Intent();
+                            intent.setClass(homepage.this, BookDetail.class);
+                            startActivity(intent);
                         }
                     }
                 });
