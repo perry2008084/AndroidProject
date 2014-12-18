@@ -71,4 +71,10 @@
     <string name="isDeletingItem">IsDeletingItem</string>
     <string name="bookcellPreferenceFile">BookcellPreferenceFile</string>
 
+    <string name="bookTitle">标题:</string>
+    <string name="bookPosition">位置:</string>
+    <string name="bookAuthor">作者:</string>
+    <string name="bookPub">出版:</string>
+    <string name="bookDescribe">简介:</string>
+
 </resources>

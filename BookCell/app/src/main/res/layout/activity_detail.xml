@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:id="@+id/">
+
+    <ImageView
+        android:id="@+id/imgBookIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_launcher" />
+    <TextView
+        android:id="@+id/tvBookTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/imgBookIcon"
+        android:textSize="28dp"
+        android:text="@string/bookTitle"
+        android:gravity="center_vertical" />
+    <TextView
+        android:id="@+id/tvBookTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/tvBookTitle"
+        android:text="广告创意与设计，大家看了罚款是假的立即开始的减肥阿克苏觉得浪费索拉卡到家了开发商加啊来得及发来撒娇的浪费时间阿里的客服就撒了老师看了大家发拉斯科的方式来的框架房雷克萨觉得房价的快乐洒家独立开发建设款到即发拉克丝基督教受到激发了卡斯加对方" />
+    <TextView
+        android:id="@+id/tvBookPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_below="@id/tvBookTitle"
+        android:textSize="28dp"
+        android:text="@string/bookPosition"
+        android:gravity="center_vertical" />
+    <TextView
+        android:id="@+id/tvBookPositionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvBookTitleText"
+        android:layout_toRightOf="@id/tvBookPosition"
+        android:text="广告创意与设计，大家看了罚款是假的立即开始的减肥阿克苏觉得浪费索拉卡到家了开发商加啊来得及发来撒娇的浪费时间阿里的客服就撒了老师看了大家发拉斯科的方式来的框架房雷克萨觉得房价的快乐洒家独立开发建设款到即发拉克丝基督教受到激发了卡斯加对方" />
+
+
+</RelativeLayout>
