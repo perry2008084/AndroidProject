@@ -77,8 +77,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	db.close(); // Closing database connection
     }
 
-    // Getting single contact
-    BookInfo Get_Contact(int id) {
+    // Getting single BookInfo
+    BookInfo Get_BookInfo(int id) {
 	SQLiteDatabase db = this.getReadableDatabase();
 
 	Cursor cursor = db.query(TABLE_BOOKCELL, new String[] { KEY_ID
@@ -89,7 +89,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         BookInfo bookInfo = new BookInfo(Integer.parseInt(cursor.getString(0)),
 		cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
-	// return contact
 	cursor.close();
 	db.close();
 

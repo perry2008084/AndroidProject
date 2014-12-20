@@ -339,8 +339,17 @@ public class homepage extends Activity implements View.OnClickListener {
                         }
                         else {
                             //toast("点击了"+list.get(position));
+                            int clickedBookId = -1;
                             Intent intent = new Intent();
                             intent.setClass(homepage.this, BookDetail.class);
+
+                            Bundle bundle = new Bundle();
+                            if (list.get(position) != null) {
+                                clickedBookId = list.get(position).getID();
+                            }
+                            bundle.putInt("BOOK_DETAIL", clickedBookId);
+                            Log.d(TAG, "Item clicked, clickedBookId: " + clickedBookId);
+                            intent.putExtra("BOOK_DETAIL_INTENT", bundle);
                             startActivity(intent);
                         }
                     }

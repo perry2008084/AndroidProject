@@ -4,6 +4,8 @@ package com.bookcell;
  * Created by perry on 2014/10/12.
  */
 
+import android.util.Log;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -15,6 +17,7 @@ import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.Source;
 
 public class NewBookDao {
+    public static final String TAG = NewBookDao.class.getSimpleName();
     public static List<BookInfo> getBooksMessage(String urlStr) throws Exception{
         List<BookInfo> list = new ArrayList<BookInfo>();
 
@@ -60,6 +63,18 @@ public class NewBookDao {
             {
                 String message = element.getAllElements().get(0).getTextExtractor().toString();
                 newBook.setDescribe(message);
+            }
+
+            if("info".equals(element.getAttributeValue("id"))) {
+                Log.d(TAG, "get id for Book author");
+                String author = element.getAllElements().get(3).getTextExtractor().toString();
+                Log.d(TAG, "after get id for Book author, set the author to BookInfo");
+                newBook.setBookAuthor(author);
+
+                Log.d(TAG, "get id for Book pub");
+                String pub = element.getAllElements().get(4).getTextExtractor().toString();
+                Log.d(TAG, "after get id for Book pub, set pub to BookInfo");
+                newBook.setBookPub(pub);
             }
         }
         list.add(newBook);

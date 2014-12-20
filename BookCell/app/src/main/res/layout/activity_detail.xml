@@ -49,7 +49,21 @@
         android:gravity="center_vertical"
         android:layout_toEndOf="@+id/tvBookPosition"
         android:layout_below="@+id/tvBookPosition"
-        android:layout_toRightOf="@+id/tvBookPosition" />
+        android:layout_toRightOf="@+id/tvBookPosition"
+        android:visibility="visible"
+        />
+
+    <EditText
+        android:id="@+id/etBookPositionEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="书架第一层从左数第三本"
+        android:gravity="center_vertical"
+        android:layout_toEndOf="@+id/tvBookPosition"
+        android:layout_below="@+id/tvBookPosition"
+        android:layout_toRightOf="@+id/tvBookPosition"
+        android:visibility="gone"
+        />
 
     <TextView
         android:id="@+id/tvBookAuthor"
@@ -109,10 +123,25 @@
         android:layout_toRightOf="@+id/tvBookDescribe" />
 
     <Button
+        android:id="@+id/bookDetailEdit"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvBookDescribeText"
         android:layout_alignParentRight="true"
-        android:text="@string/edit" />
+        android:text="@string/edit"
+        android:onClick="onBtnBookDetailEditClick"
+        android:visibility="visible"
+        />
+
+    <Button
+        android:id="@+id/bookDetailSave"
+        android:layout_width="96dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvBookDescribeText"
+        android:layout_alignParentRight="true"
+        android:text="@string/done"
+        android:onClick="onBtnBookDetailSaveClick"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>
