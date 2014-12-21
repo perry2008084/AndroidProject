@@ -43,6 +43,15 @@ public class BookDetail extends Activity{
             }
         }
 
+        Bundle bundle_search = this.getIntent().getBundleExtra("SEARCH_INTENT");
+
+        if (bundle_search != null) {
+            m_nBookId = bundle_search.getInt("SEARCHED_BOOKID");
+            if (m_nBookId != -1) {
+                Referash_Data(m_nBookId);
+            }
+        }
+
     }
 
     public void getWidget() {

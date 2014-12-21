@@ -95,6 +95,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	return bookInfo;
     }
 
+    int get_BookInfoId_With_Title(String title) {
+        int nBookId = -1;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_BOOKCELL, new String[] { KEY_ID
+                        ,KEY_ISBN, KEY_NAME, KEY_AUTHER, KEY_PUB, KEY_POSITION, KEY_DESCRIBE }, KEY_NAME + "=?",
+                new String[] { String.valueOf(title) }, null, null, null, null);
+        Log.v(TAG, "get_BookInfoId_With_Title() cursor: " + cursor);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        if (cursor.getCount() <= 0) {
+            return -1;
+        }
+
+        BookInfo bookInfo = new BookInfo(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
+
+        nBookId = Integer.parseInt(cursor.getString(0));
+
+        cursor.close();
+        db.close();
+
+        return nBookId;
+    }
+
     // Getting All BookInfos
     public ArrayList<BookInfo> Get_BookInfos() {
 	try {
