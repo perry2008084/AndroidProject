@@ -108,6 +108,7 @@ public class scan extends DecoderActivity {
     }
 
     protected void showScanner() {
+        Log.v(TAG, "showScanner()");
         inScanMode = true;
         resultView.setVisibility(View.GONE);
         statusView.setText(R.string.msg_default_status);

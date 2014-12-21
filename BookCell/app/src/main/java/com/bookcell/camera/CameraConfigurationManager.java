@@ -47,13 +47,14 @@ public final class CameraConfigurationManager {
 
     /**
      * Reads, one time, values from the camera that are needed by the app.
-     */
+    */
     void initFromCameraParameters(Camera camera) {
         Camera.Parameters parameters = camera.getParameters();
         WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = manager.getDefaultDisplay();
         int width = display.getWidth();
         int height = display.getHeight();
+        Log.i(TAG, "width: " + width + " height: " + height);
         // We're landscape-only, and have apparently seen issues with display
         // thinking it's portrait
         // when waking from sleep. If it's not landscape, assume it's mistaken
@@ -64,6 +65,7 @@ public final class CameraConfigurationManager {
             width = height;
             height = temp;
         }
+
         screenResolution = new Point(width, height);
         Log.i(TAG, "Screen resolution: " + screenResolution);
         cameraResolution = findBestPreviewSizeValue(parameters, screenResolution, false);
