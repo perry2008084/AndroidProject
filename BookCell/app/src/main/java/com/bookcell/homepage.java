@@ -212,6 +212,7 @@ public class homepage extends Activity implements View.OnClickListener {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                Log.d(TAG, "getData() doInBackground() listNewBooks: " + listNewBooks);
                 return listNewBooks;
             }
 
@@ -229,18 +230,24 @@ public class homepage extends Activity implements View.OnClickListener {
                 super.onPostExecute(result);
                 */
 
-                if (result.size() > 0)
-                {
-                    list.addAll(result);
-                    ll_loading.setVisibility(View.GONE);
-                    lv_main_books.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+                Log.d(TAG, "getData() result: " + result);
+                if (result != null) {
+                    Log.d(TAG, "getData() call onPostExecute() result.size(): " + result.size());
+                    if (result.size() > 0) {
+                        list.addAll(result);
+                        ll_loading.setVisibility(View.GONE);
+                        lv_main_books.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
 
-                    db.Add_BookInfo(result.get(0));
-                    String Toast_msg = "Data inserted successfully";
-                    toast(Toast_msg);
+                        db.Add_BookInfo(result.get(0));
+                        String Toast_msg = "Data inserted successfully";
+                        toast(Toast_msg);
 
-                    Set_Referash_Data();
+                        Set_Referash_Data();
+                    }
+                }
+                else {
+                    toast("亲，请确认是否忘记联网？");
                 }
                 super.onPostExecute(result);
             }
