@@ -59,8 +59,8 @@
         android:layout_height="wrap_content"
         android:text="书架第一层从左数第三本"
         android:gravity="center_vertical"
+        android:layout_below="@id/tvBookTitleText"
         android:layout_toEndOf="@+id/tvBookPosition"
-        android:layout_below="@+id/tvBookPosition"
         android:layout_toRightOf="@+id/tvBookPosition"
         android:visibility="gone"
         />

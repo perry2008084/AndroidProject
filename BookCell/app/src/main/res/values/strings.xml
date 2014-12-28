@@ -79,4 +79,9 @@
     <string name="edit">编辑</string>
     <string name="done">完成</string>
 
+    <!--
+    提示语
+    -->
+    <string name="searchConfirm">请输入正确书名</string>
+
 </resources>

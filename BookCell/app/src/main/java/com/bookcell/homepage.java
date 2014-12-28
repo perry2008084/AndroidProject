@@ -239,6 +239,7 @@ public class homepage extends Activity implements View.OnClickListener {
                         lv_main_books.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
 
+                        Log.i(TAG, "getData() call add_BookInfo from db");
                         db.Add_BookInfo(result.get(0));
                         String Toast_msg = "Data inserted successfully";
                         toast(Toast_msg);
@@ -429,6 +430,8 @@ public class homepage extends Activity implements View.OnClickListener {
     public void onBtnScanClick(View view) {
         Intent intent = new Intent();
         intent.setClass(homepage.this, scan.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
@@ -449,6 +452,7 @@ public class homepage extends Activity implements View.OnClickListener {
             isCameraRet = bunde.getBoolean("IS_CAMERA_RETURNED");
             Log.i(TAG, "onResume isCameraRet: " + isCameraRet);
             if (isCameraRet) {
+                Log.i(TAG, "Get (ISBN_INTENT) Intent: IS_CAMERA_RETURNED: " + isCameraRet);
                 String isbnStr = bunde.getString("ISBN_VALUE");
                 Log.i(TAG, "onResume isbnStr: " + isbnStr);
                 String urlStr = "http://book.douban.com/isbn/";

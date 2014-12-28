@@ -27,6 +27,7 @@ public class search extends Activity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
@@ -138,12 +139,12 @@ public class search extends Activity implements View.OnClickListener{
 
     public void onBtnSearchConfirmClick(View v) {
         Log.d(TAG, "onBtnSearchConfirmClick() valid_title: " + valid_title);
-        if (!valid_title.isEmpty() && getBookIdFromDb(valid_title) != -1) {
+        if (valid_title != null && !valid_title.isEmpty() && getBookIdFromDb(valid_title) != -1) {
             btnSearchItem1.setText(valid_title);
             btnSearchItem1.setVisibility(View.VISIBLE);
         }
         else {
-            toast("请输入正确书名");
+            toast(getString(R.string.searchConfirm));
         }
 
     }
