@@ -112,7 +112,7 @@ public class scan extends DecoderActivity {
         Log.v(TAG, "showScanner()");
         inScanMode = true;
         resultView.setVisibility(View.GONE);
-        statusView.setText(R.string.msg_default_status);
+        statusView.setText(R.string.scanTips);
         statusView.setVisibility(View.VISIBLE);
         viewfinderView.setVisibility(View.VISIBLE);
     }

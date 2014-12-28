@@ -246,6 +246,7 @@ public class homepage extends Activity implements View.OnClickListener {
 
                         Set_Referash_Data();
                     }
+                    result.clear();
                 }
                 else {
                     toast("亲，请确认是否忘记联网？");
@@ -446,19 +447,20 @@ public class homepage extends Activity implements View.OnClickListener {
         Log.v(TAG, "onResume()");
 
         boolean isCameraRet = false;
-        Bundle bunde = this.getIntent().getBundleExtra("ISBN_INTENT");
+        Bundle bunde = this.getIntent().getBundleExtra(getString(R.string.isbnIntent));
 
         if (bunde != null) {
-            isCameraRet = bunde.getBoolean("IS_CAMERA_RETURNED");
+            isCameraRet = bunde.getBoolean(getString(R.string.isCameraReturned));
             Log.i(TAG, "onResume isCameraRet: " + isCameraRet);
             if (isCameraRet) {
                 Log.i(TAG, "Get (ISBN_INTENT) Intent: IS_CAMERA_RETURNED: " + isCameraRet);
-                String isbnStr = bunde.getString("ISBN_VALUE");
+                String isbnStr = bunde.getString(getString(R.string.isbnValue));
                 Log.i(TAG, "onResume isbnStr: " + isbnStr);
                 String urlStr = "http://book.douban.com/isbn/";
                 urlStr += isbnStr;
                 urlStr += "/";
                 getData(urlStr);
+                bunde.putBoolean(getString(R.string.isCameraReturned), false);
             }
         }
 

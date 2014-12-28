@@ -83,5 +83,13 @@
     提示语
     -->
     <string name="searchConfirm">请输入正确书名</string>
+    <string name="scanTips">请将条形码放置在扫描框中</string>
+
+    <!--
+    Intent usage
+    -->
+    <string name="isbnIntent">ISBN_INTENT</string>
+    <string name="isCameraReturned">IS_CAMERA_RETURNED</string>
+    <string name="isbnValue">ISBN_VALUE</string>
 
 </resources>
