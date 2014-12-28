@@ -84,6 +84,8 @@
     -->
     <string name="searchConfirm">请输入正确书名</string>
     <string name="scanTips">请将条形码放置在扫描框中</string>
+    <string name="networkDisconnet">亲，请确认是否忘记联网？</string>
+    <string name="bookAlreadyInDB">亲，你扫的书本已经存在:)</string>
 
     <!--
     Intent usage

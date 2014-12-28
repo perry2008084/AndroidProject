@@ -200,14 +200,14 @@ public class homepage extends Activity implements View.OnClickListener {
         }
     }
 
-    private void getData(final String urlStr) {
+    private void getData(final String isbnStr) {
         Log.v(TAG, "getData()");
         new AsyncTask<Void, String, List<BookInfo>>() {
             protected List<BookInfo> doInBackground(Void... params) {
                 List<BookInfo> listNewBooks = null;
                 try {
-                    Log.v(TAG, "NewBookDao.getBooksMessage() urlStr: " + urlStr);
-                    listNewBooks = NewBookDao.getBooksMessage(urlStr);
+                    Log.v(TAG, "NewBookDao.getBooksMessage() urlStr: " + isbnStr);
+                    listNewBooks = NewBookDao.getBooksMessage(isbnStr);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -239,17 +239,27 @@ public class homepage extends Activity implements View.OnClickListener {
                         lv_main_books.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
 
-                        Log.i(TAG, "getData() call add_BookInfo from db");
-                        db.Add_BookInfo(result.get(0));
-                        String Toast_msg = "Data inserted successfully";
-                        toast(Toast_msg);
+                        // check only one book in database with the same ISBN
+                        String bookTmpIsbn = result.get(0).getBookISBN();
+                        Log.v(TAG, "getData() bookTmpIsbn" + bookTmpIsbn);
+                        boolean isBookNotExisted = db.CheckBookCanAdd(bookTmpIsbn);
+                        Log.v(TAG, "getData() isBookExisted: " + isBookNotExisted);
+                        if (!isBookNotExisted) {
+                            Log.i(TAG, "getData() call add_BookInfo from db");
+                            db.Add_BookInfo(result.get(0));
+                            String Toast_msg = "Data inserted successfully";
+                            toast(Toast_msg);
 
-                        Set_Referash_Data();
+                            Set_Referash_Data();
+                        }
+                        else {
+                            toast(getString(R.string.bookAlreadyInDB));
+                        }
                     }
                     result.clear();
                 }
                 else {
-                    toast("亲，请确认是否忘记联网？");
+                    toast(getString(R.string.networkDisconnet));
                 }
                 super.onPostExecute(result);
             }
@@ -457,14 +467,29 @@ public class homepage extends Activity implements View.OnClickListener {
             isCameraRet = bunde.getBoolean(getString(R.string.isCameraReturned));
             Log.i(TAG, "onResume isCameraRet: " + isCameraRet);
             if (isCameraRet) {
-                Log.i(TAG, "Get (ISBN_INTENT) Intent: IS_CAMERA_RETURNED: " + isCameraRet);
+                Log.i(TAG, "onResume() Get (ISBN_INTENT) Intent: IS_CAMERA_RETURNED: " + isCameraRet);
                 String isbnStr = bunde.getString(getString(R.string.isbnValue));
                 Log.i(TAG, "onResume isbnStr: " + isbnStr);
-                String urlStr = "http://book.douban.com/isbn/";
-                urlStr += isbnStr;
-                urlStr += "/";
-                getData(urlStr);
+
+                db = new DatabaseHandler(this);
+                // check only one book in database with the same ISBN
+                boolean isBookNotExisted = db.CheckBookCanAdd(isbnStr);
+                Log.v(TAG, "onResume() isBookExisted: " + isBookNotExisted);
+
+                if (!isBookNotExisted) {
+                    Log.v(TAG, "onResume() call getData()");
+                    //String urlStr = "http://book.douban.com/isbn/";
+                    //urlStr += isbnStr;
+                    //urlStr += "/";
+                    getData(isbnStr);
+                }
+                else {
+                    toast(getString(R.string.bookAlreadyInDB));
+                }
+
                 bunde.putBoolean(getString(R.string.isCameraReturned), false);
+
+                db.close();
             }
         }
 

@@ -179,10 +179,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Deleting single BookInfo
     public void Delete_BookInfo(int id) {
-	SQLiteDatabase db = this.getWritableDatabase();
-	db.delete(TABLE_BOOKCELL, KEY_ID + " = ?",
-		new String[] { String.valueOf(id) });
-	db.close();
+        Log.v(TAG, "Delete_BookInfo()");
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_BOOKCELL, KEY_ID + " = ?",
+                    new String[] { String.valueOf(id) });
+        db.close();
     }
 
     // Getting BookInfo Count
@@ -194,6 +196,41 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	// return count
 	return cursor.getCount();
+    }
+
+    // Check book can add to db
+    // If there is already the same book in db, just warn the user.
+    public boolean CheckBookCanAdd(String isbn) {
+        boolean isBookExist = false;
+        Log.v(TAG, "CheckBookCanAdd().");
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_BOOKCELL, new String[] { KEY_ID
+                        ,KEY_ISBN}, KEY_ISBN + "=?",
+                new String[] { String.valueOf(isbn) }, null, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+            //isBookExist = true;
+            //Log.v(TAG, "CheckBookCanAdd() book existed");
+        }
+        else {
+            //Log.v(TAG, "CheckBookCanAdd() book not existed");
+            //isBookExist = false;
+        }
+
+        if (cursor.getCount() <= 0) {
+            isBookExist = false;
+            Log.v(TAG, "CheckBookCanAdd() book not existed");
+        }
+        else{
+            isBookExist = true;
+            Log.v(TAG, "CheckBookCanAdd() book existed");
+        }
+
+        cursor.close();
+        db.close();
+
+        return isBookExist;
     }
 
 }

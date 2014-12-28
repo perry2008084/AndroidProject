@@ -18,11 +18,18 @@ import net.htmlparser.jericho.Source;
 
 public class NewBookDao {
     public static final String TAG = NewBookDao.class.getSimpleName();
-    public static List<BookInfo> getBooksMessage(String urlStr) throws Exception{
+    public static List<BookInfo> getBooksMessage(String isbnStr) throws Exception{
         List<BookInfo> list = new ArrayList<BookInfo>();
+        BookInfo newBook = new BookInfo();
+
+        newBook.setBookISBN(isbnStr);
 
         //urlStr = "http://book.douban.com/isbn/9787040100952/";
         //urlStr = "http://book.douban.com/isbn/9787121148750/";
+
+        String urlStr = "http://book.douban.com/isbn/";
+        urlStr += isbnStr;
+        urlStr += "/";
 
         URL serverUrl = new URL(urlStr);
         HttpURLConnection conn = (HttpURLConnection) serverUrl
@@ -42,7 +49,6 @@ public class NewBookDao {
         URLConnection connBook = url.openConnection();
         Source source = new Source(connBook);
 
-        BookInfo newBook = new BookInfo();
         List<Element> aList = source.getAllElements("a");
         for(Element element:aList)
         {
