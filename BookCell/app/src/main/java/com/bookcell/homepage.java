@@ -351,6 +351,8 @@ public class homepage extends Activity implements View.OnClickListener {
                             int clickedBookId = -1;
                             Intent intent = new Intent();
                             intent.setClass(homepage.this, BookDetail.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                    | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                             Bundle bundle = new Bundle();
                             if (list.get(position) != null) {
@@ -431,14 +433,16 @@ public class homepage extends Activity implements View.OnClickListener {
     public void onBtnScanClick(View view) {
         Intent intent = new Intent();
         intent.setClass(homepage.this, scan.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                | Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+//                | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
     public void onBtnSearchClick(View view) {
         Intent intent = new Intent();
         intent.setClass(homepage.this, search.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 

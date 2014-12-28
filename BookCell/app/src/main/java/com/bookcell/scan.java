@@ -65,6 +65,8 @@ public class scan extends DecoderActivity {
         if (!isGetDecoderResult) {
             Intent intent = new Intent();
             intent.setClass(scan.this, homepage.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    | Intent.FLAG_ACTIVITY_NEW_TASK);
             Bundle bundle = new Bundle();
             bundle.putBoolean("IS_CAMERA_RETURNED", false);
             bundle.putString("ISBN_VALUE", "");
@@ -178,6 +180,8 @@ public class scan extends DecoderActivity {
 
         Intent intent = new Intent();
         intent.setClass(scan.this, homepage.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_NEW_TASK);
         Bundle bundle = new Bundle();
         bundle.putBoolean("IS_CAMERA_RETURNED", true);
         bundle.putString("ISBN_VALUE", contentsTextView.getText().toString());

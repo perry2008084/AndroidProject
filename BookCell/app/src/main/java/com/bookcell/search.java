@@ -130,6 +130,8 @@ public class search extends Activity implements View.OnClickListener{
     public void showBookDetail(int nBookId){
         Intent intent = new Intent();
         intent.setClass(search.this, BookDetail.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_NEW_TASK);
         Bundle bundle = new Bundle();
         bundle.putInt("SEARCHED_BOOKID", nBookId);
         Log.d(TAG, "search clicked nBookId: " + nBookId);

@@ -58,6 +58,8 @@ public class Welcome extends Activity {
     public void jumpToHomePage() {
         Intent intent = new Intent();
         intent.setClass(Welcome.this, homepage.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
