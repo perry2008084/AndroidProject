@@ -65,12 +65,9 @@ public class homepage extends Activity implements View.OnClickListener {
 
         list = new ArrayList<BookInfo>();
         selectid = new ArrayList<BookInfo>();
-        //adapter = new SubjectListAdapter();
 
         Log.v(TAG, "onCreate() Set_Referash_Data()");
         Set_Referash_Data();
-
-        //getData("http://book.douban.com/isbn/9787121148750/");
 
         lv_main_books.setOnScrollListener(new AbsListView.OnScrollListener() {
 
@@ -173,8 +170,7 @@ public class homepage extends Activity implements View.OnClickListener {
             case R.id.cancle:
                 isMulChoice = false;
                 selectid.clear();
-                adapter = new SubjectListAdapter();
-                lv_main_books.setAdapter(adapter);
+                Set_Referash_Data();
                 layout.setVisibility(View.INVISIBLE);
                 break;
             case R.id.edit:
@@ -192,8 +188,7 @@ public class homepage extends Activity implements View.OnClickListener {
                     }
                 }
                 selectid.clear();
-                adapter = new SubjectListAdapter();
-                lv_main_books.setAdapter(adapter);
+                Set_Referash_Data();
                 layout.setVisibility(View.INVISIBLE);
             default:
                 break;
@@ -234,10 +229,7 @@ public class homepage extends Activity implements View.OnClickListener {
                 if (result != null) {
                     Log.d(TAG, "getData() call onPostExecute() result.size(): " + result.size());
                     if (result.size() > 0) {
-                        list.addAll(result);
                         ll_loading.setVisibility(View.GONE);
-                        lv_main_books.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
 
                         // check only one book in database with the same ISBN
                         String bookTmpIsbn = result.get(0).getBookISBN();
@@ -245,6 +237,8 @@ public class homepage extends Activity implements View.OnClickListener {
                         boolean isBookNotExisted = db.CheckBookCanAdd(bookTmpIsbn);
                         Log.v(TAG, "getData() isBookExisted: " + isBookNotExisted);
                         if (!isBookNotExisted) {
+                            list.addAll(result);
+
                             Log.i(TAG, "getData() call add_BookInfo from db");
                             db.Add_BookInfo(result.get(0));
                             String Toast_msg = "Data inserted successfully";
@@ -315,11 +309,13 @@ public class homepage extends Activity implements View.OnClickListener {
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
+            Log.v(TAG, "getView() position: " + position);
             //View view = mView.get(position);
             View view = null;
-            com.bookcell.ViewCache viewCache;
+            ViewCache viewCache;
             ViewHolder viewHolder = null;
             if (convertView == null) {
+                Log.v(TAG, "getView() convertView null.");
                 viewHolder = new ViewHolder();
                 view = View.inflate(homepage.this, R.layout.main_item, null);
                 viewCache = new ViewCache(view);
@@ -378,6 +374,7 @@ public class homepage extends Activity implements View.OnClickListener {
 
                // mView.put(position, view);
             } else {
+                Log.v(TAG, "getView() convertView not null.");
                 view = convertView;
                 viewHolder = (ViewHolder) view.getTag(R.id.tag_second);
                 viewCache = (ViewCache) view.getTag(R.id.tag_first);
@@ -426,8 +423,7 @@ public class homepage extends Activity implements View.OnClickListener {
                     adapter.visiblecheck.put(i, CheckBox.VISIBLE);
                 }
 
-                adapter = new SubjectListAdapter();
-                lv_main_books.setAdapter(adapter);
+                Set_Referash_Data();
                 return true;
             }
         }
@@ -443,8 +439,6 @@ public class homepage extends Activity implements View.OnClickListener {
     public void onBtnScanClick(View view) {
         Intent intent = new Intent();
         intent.setClass(homepage.this, scan.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-//                | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
@@ -478,9 +472,6 @@ public class homepage extends Activity implements View.OnClickListener {
 
                 if (!isBookNotExisted) {
                     Log.v(TAG, "onResume() call getData()");
-                    //String urlStr = "http://book.douban.com/isbn/";
-                    //urlStr += isbnStr;
-                    //urlStr += "/";
                     getData(isbnStr);
                 }
                 else {
@@ -493,8 +484,8 @@ public class homepage extends Activity implements View.OnClickListener {
             }
         }
 
-        Log.v(TAG, "onResume() Set_Referash_Data()");
-        Set_Referash_Data();
+//        Log.v(TAG, "onResume() Set_Referash_Data()");
+//        Set_Referash_Data();
     }
 
     @Override
@@ -523,6 +514,10 @@ public class homepage extends Activity implements View.OnClickListener {
 
     public void Set_Referash_Data() {
         list.clear();
+        adapter = new SubjectListAdapter();
+        lv_main_books.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
         db = new DatabaseHandler(this);
         ArrayList<BookInfo> bookInfo_array_from_db = db.Get_BookInfos();
 
