@@ -1,5 +1,6 @@
 package com.bookcell;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,6 +10,9 @@ import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.content.Intent;
 import android.view.ViewGroup;
@@ -325,53 +329,6 @@ public class homepage extends Activity implements View.OnClickListener {
                 viewHolder.tv_synopsis = (TextView) view.findViewById(R.id.tv_synopsis);
                 view.setTag(R.id.tag_second,viewHolder);
 
-                final CheckBox ceb = (CheckBox)view.findViewById(R.id.check);
-                Log.w(TAG, "getView() position: " + position + " ischeck.size(): " + ischeck.size() + " ischeck.get(position): " + ischeck.get(position));
-                if (position < ischeck.size()) {
-                    ceb.setChecked(ischeck.get(position));
-                }
-                Log.w(TAG, "getView() position: " + position + " visiblecheck.size(): " + visiblecheck.size() + " visiblecheck.get(position): " + visiblecheck.get(position));
-                if (position < visiblecheck.size()) {
-                    ceb.setVisibility(visiblecheck.get(position));
-                }
-
-                view.setOnLongClickListener(new Onlongclick());
-
-                view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(isMulChoice) {
-                            if(ceb.isChecked()) {
-                                ceb.setChecked(false);
-                                selectid.remove(list.get(position));
-                            }
-                            else{
-                                ceb.setChecked(true);
-                                selectid.add(list.get(position));
-                            }
-
-                            txtcount.setText( "共计 " + selectid.size() + " 项");
-                        }
-                        else {
-                            //toast("点击了"+list.get(position));
-                            int clickedBookId = -1;
-                            Intent intent = new Intent();
-                            intent.setClass(homepage.this, BookDetail.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                                    | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                            Bundle bundle = new Bundle();
-                            if (list.get(position) != null) {
-                                clickedBookId = list.get(position).getID();
-                            }
-                            bundle.putInt("BOOK_DETAIL", clickedBookId);
-                            Log.d(TAG, "Item clicked, clickedBookId: " + clickedBookId);
-                            intent.putExtra("BOOK_DETAIL_INTENT", bundle);
-                            startActivity(intent);
-                        }
-                    }
-                });
-
                // mView.put(position, view);
             } else {
                 Log.v(TAG, "getView() convertView not null.");
@@ -379,6 +336,54 @@ public class homepage extends Activity implements View.OnClickListener {
                 viewHolder = (ViewHolder) view.getTag(R.id.tag_second);
                 viewCache = (ViewCache) view.getTag(R.id.tag_first);
             }
+
+            final CheckBox ceb = (CheckBox)view.findViewById(R.id.check);
+            Log.w(TAG, "getView() position: " + position + " ischeck.size(): " + ischeck.size() + " ischeck.get(position): " + ischeck.get(position));
+            if (position < ischeck.size()) {
+                ceb.setChecked(ischeck.get(position));
+            }
+            Log.w(TAG, "getView() position: " + position + " visiblecheck.size(): " + visiblecheck.size() + " visiblecheck.get(position): " + visiblecheck.get(position));
+            if (position < visiblecheck.size()) {
+                ceb.setVisibility(visiblecheck.get(position));
+            }
+
+            view.setOnLongClickListener(new Onlongclick());
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(isMulChoice) {
+                        if(ceb.isChecked()) {
+                            ceb.setChecked(false);
+                            selectid.remove(list.get(position));
+                        }
+                        else{
+                            ceb.setChecked(true);
+                            selectid.add(list.get(position));
+                        }
+
+                        txtcount.setText( "共计 " + selectid.size() + " 项");
+                    }
+                    else {
+                        //toast("点击了"+list.get(position));
+                        int clickedBookId = -1;
+                        Intent intent = new Intent();
+                        intent.setClass(homepage.this, BookDetail.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                        Bundle bundle = new Bundle();
+                        if (list.get(position) != null) {
+                            clickedBookId = list.get(position).getID();
+                        }
+                        bundle.putInt("BOOK_DETAIL", clickedBookId);
+                        Log.d(TAG, "Item clicked, clickedBookId: " + clickedBookId);
+                        intent.putExtra("BOOK_DETAIL_INTENT", bundle);
+                        startActivity(intent);
+                    }
+                }
+            });
+
             BookInfo newBook = list.get(position);
             viewHolder.tv_name.setText(newBook.getName());
             viewHolder.tv_message.setText(newBook.getDescribe());
@@ -546,6 +551,31 @@ public class homepage extends Activity implements View.OnClickListener {
         adapter = new SubjectListAdapter();
         lv_main_books.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.v(TAG, "onCreateOptionMenu()");
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.homepage, menu);
+        return super.onCreateOptionsMenu(menu);
+        //return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+//            case R.id.action_search:
+//                openSearch();
+//                return true;
+            case R.id.action_settings:
+                //openSettings();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void toast( String text )
