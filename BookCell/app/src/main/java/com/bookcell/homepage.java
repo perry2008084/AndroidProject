@@ -570,12 +570,19 @@ public class homepage extends Activity implements View.OnClickListener {
 //            case R.id.action_search:
 //                openSearch();
 //                return true;
-            case R.id.action_settings:
-                //openSettings();
+            case R.id.action_about:
+                openSettings();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    void openSettings()
+    {
+        Intent intent = new Intent();
+        intent.setClass(homepage.this, AppAbout.class);
+        startActivity(intent);
     }
 
     private void toast( String text )
