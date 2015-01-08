@@ -6,8 +6,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         >
 
         <Button
@@ -15,6 +14,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="25sp"
             android:text="@string/title_activity_homepage"
             />
 
@@ -23,6 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="25sp"
             android:text="@string/title_activity_scan"
             android:onClick="onBtnScanClick" />
 
@@ -31,15 +32,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="25sp"
             android:text="@string/title_activity_search"
             android:onClick="onBtnSearchClick" />
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="8"
+        android:orientation="horizontal"
         >
 
         <ListView
@@ -76,8 +78,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/lemonchiffon"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
         <Button
             android:id="@+id/cancle"
             android:layout_width="wrap_content"
@@ -97,18 +98,6 @@
             android:layout_centerInParent="true"
 
             />
-
-        <Button
-        android:id="@+id/edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="|  编辑"
-        android:textSize="20sp"
-        android:background="@null"
-        android:layout_centerVertical="true"
-        android:visibility="gone"
-        />
-
         <Button
             android:id="@+id/delete"
             android:layout_width="wrap_content"

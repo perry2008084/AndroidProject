@@ -38,7 +38,7 @@ public class homepage extends Activity implements View.OnClickListener {
 
     private ListView lv_main_books;
     private LinearLayout ll_loading;
-    private Button cancel,delete,edit;
+    private Button cancel,delete;
     private TextView txtcount;
     private List<BookInfo> list;
     private List<BookInfo> selectid;
@@ -61,10 +61,8 @@ public class homepage extends Activity implements View.OnClickListener {
         layout = (RelativeLayout) this.findViewById(R.id.relative);
         txtcount = (TextView) this.findViewById(R.id.txtcount);
         cancel = (Button)findViewById(R.id.cancle);
-        edit = (Button)findViewById(R.id.edit);
         delete = (Button)findViewById(R.id.delete);
         cancel.setOnClickListener(this);
-        edit.setOnClickListener(this);
         delete.setOnClickListener(this);
 
         list = new ArrayList<BookInfo>();
@@ -176,8 +174,6 @@ public class homepage extends Activity implements View.OnClickListener {
                 selectid.clear();
                 Set_Referash_Data();
                 layout.setVisibility(View.INVISIBLE);
-                break;
-            case R.id.edit:
                 break;
             case R.id.delete:
                 isMulChoice = false;
