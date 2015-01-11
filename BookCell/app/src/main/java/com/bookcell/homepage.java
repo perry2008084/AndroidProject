@@ -323,6 +323,7 @@ public class homepage extends Activity implements View.OnClickListener {
                 viewHolder.tv_name = (TextView) view.findViewById(R.id.tv_name);
                 viewHolder.tv_message = (TextView) view.findViewById(R.id.tv_message);
                 viewHolder.tv_synopsis = (TextView) view.findViewById(R.id.tv_synopsis);
+                viewHolder._checkbox = (CheckBox) view.findViewById(R.id.check);
                 view.setTag(R.id.tag_second,viewHolder);
 
                // mView.put(position, view);
@@ -333,9 +334,10 @@ public class homepage extends Activity implements View.OnClickListener {
                 viewCache = (ViewCache) view.getTag(R.id.tag_first);
             }
 
-            final CheckBox ceb = (CheckBox)view.findViewById(R.id.check);
+            final CheckBox ceb = viewHolder._checkbox;
             Log.w(TAG, "getView() position: " + position + " ischeck.size(): " + ischeck.size() + " ischeck.get(position): " + ischeck.get(position));
             if (position < ischeck.size()) {
+                Log.d(TAG, "ceb.setChecked(): " + ischeck.get(position));
                 ceb.setChecked(ischeck.get(position));
             }
             Log.w(TAG, "getView() position: " + position + " visiblecheck.size(): " + visiblecheck.size() + " visiblecheck.get(position): " + visiblecheck.get(position));
@@ -350,11 +352,15 @@ public class homepage extends Activity implements View.OnClickListener {
                 public void onClick(View v) {
                     if(isMulChoice) {
                         if(ceb.isChecked()) {
+                            Log.d(TAG, "ceb.setChecked(): " + false);
                             ceb.setChecked(false);
+                            ischeck.put(position,false);
                             selectid.remove(list.get(position));
                         }
                         else{
+                            Log.d(TAG, "ceb.setChecked(): " + true);
                             ceb.setChecked(true);
+                            ischeck.put(position,true);
                             selectid.add(list.get(position));
                         }
 
@@ -419,6 +425,7 @@ public class homepage extends Activity implements View.OnClickListener {
                 Log.v(TAG, "onLongClick()");
                 isMulChoice = true;
                 selectid.clear();
+                txtcount.setText( "共计 " + selectid.size() + " 项");
                 layout.setVisibility(View.VISIBLE);
                 for (int i = 0; i < list.size(); i++) {
                     adapter.visiblecheck.put(i, CheckBox.VISIBLE);
@@ -435,6 +442,7 @@ public class homepage extends Activity implements View.OnClickListener {
         TextView tv_name;
         TextView tv_message;
         TextView tv_synopsis;
+        CheckBox _checkbox;
     }
 
     public void onBtnScanClick(View view) {
