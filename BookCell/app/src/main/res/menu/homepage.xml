@@ -2,6 +2,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.bookcell.homepage" >
 
+    <item
+        android:id="@+id/action_scan"
+        android:icon="@drawable/scan"
+        android:title="@string/action_scan"
+        android:showAsAction="ifRoom"
+    />
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/search"
+        android:title="@string/action_search"
+        android:showAsAction="ifRoom"
+    />
+
     <item android:id="@+id/action_about"
         android:title="@string/action_about"
         android:showAsAction="ifRoom|withText" />

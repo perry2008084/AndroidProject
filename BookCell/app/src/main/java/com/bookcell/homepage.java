@@ -109,7 +109,7 @@ public class homepage extends Activity implements View.OnClickListener {
                             if (drawable != null) {
                                 iv_icon.setImageDrawable(drawable);
                             } else {
-                                iv_icon.setImageResource(R.drawable.ic_launcher);
+                                iv_icon.setImageResource(R.drawable.secret_book);
                             }
                         }
                         break;
@@ -396,7 +396,7 @@ public class homepage extends Activity implements View.OnClickListener {
             ImageView imgBook = viewCache.getImageView();
             imgBook.setTag(imgUrl);
             if(isScrolling){
-                imgBook.setImageResource(R.drawable.ic_launcher);
+                imgBook.setImageResource(R.drawable.secret_book);
             }else{
                 Drawable drawable = null;
                 if (isWifi(getApplicationContext())) {
@@ -418,12 +418,12 @@ public class homepage extends Activity implements View.OnClickListener {
                     imgBook.setImageDrawable(drawable);
                 } else {
                     Log.d(TAG, "setImageDrawable from native");
-                    imgBook.setImageResource(R.drawable.ic_launcher);
+                    imgBook.setImageResource(R.drawable.secret_book);
 
                     ImageView imageViewByTag = (ImageView) lv_main_books
                             .findViewWithTag(imgUrl);
                     if (imageViewByTag != null) {
-                        imageViewByTag.setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher));
+                        imageViewByTag.setImageDrawable(getResources().getDrawable(R.drawable.secret_book));
                     }
                 }
             }
@@ -581,11 +581,14 @@ public class homepage extends Activity implements View.OnClickListener {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-//            case R.id.action_search:
-//                openSearch();
-//                return true;
+            case R.id.action_search:
+                openSearch();
+                return true;
             case R.id.action_about:
                 openSettings();
+                return true;
+            case R.id.action_scan:
+                openScan();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -596,6 +599,22 @@ public class homepage extends Activity implements View.OnClickListener {
     {
         Intent intent = new Intent();
         intent.setClass(homepage.this, AppAbout.class);
+        startActivity(intent);
+    }
+
+    void openSearch()
+    {
+        Intent intent = new Intent();
+        intent.setClass(homepage.this, search.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    void openScan()
+    {
+        Intent intent = new Intent();
+        intent.setClass(homepage.this, scan.class);
         startActivity(intent);
     }
 

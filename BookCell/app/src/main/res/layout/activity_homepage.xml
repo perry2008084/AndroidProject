@@ -3,7 +3,7 @@
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/sea">
-
+<!--
     <LinearLayout
         android:id="@+id/homePageBtnArea"
         android:layout_width="fill_parent"
@@ -37,12 +37,11 @@
             android:text="@string/title_activity_search"
             android:onClick="onBtnSearchClick" />
     </LinearLayout>
-
+-->
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/homePageBtnArea"
         >
 
         <ListView
