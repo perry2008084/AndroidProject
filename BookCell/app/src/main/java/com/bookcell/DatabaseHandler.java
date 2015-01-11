@@ -30,6 +30,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_PUB = "pub";
     private static final String KEY_POSITION = "position";
     private static final String KEY_DESCRIBE = "describe";
+    private static final String KEY_PICPATH = "picPath";
     private final ArrayList<BookInfo> bookInfo_list = new ArrayList<BookInfo>();
 
     public DatabaseHandler(Context context) {
@@ -42,7 +43,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	String CREATE_BOOKCELL_TABLE = "CREATE TABLE " + TABLE_BOOKCELL + "("
 		+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_ISBN + " TEXT," + KEY_NAME + " TEXT,"
         + KEY_AUTHER + " TEXT," + KEY_PUB + " TEXT," + KEY_POSITION + " TEXT,"
-        + KEY_DESCRIBE + " TEXT" + ")";
+        + KEY_DESCRIBE + " TEXT, " + KEY_PICPATH + " TEXT" +")";
 	db.execSQL(CREATE_BOOKCELL_TABLE);
     }
 
@@ -64,12 +65,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void Add_BookInfo(BookInfo bookInfo) {
 	SQLiteDatabase db = this.getWritableDatabase();
 	ContentValues values = new ContentValues();
-    values.put(KEY_ISBN, bookInfo.getBookISBN()); // BookInfo ISBN
-    values.put(KEY_NAME, bookInfo.getName()); // BookInfo Name
-    values.put(KEY_AUTHER, bookInfo.getBookAuthor()); // BookInfo Author
-    values.put(KEY_PUB, bookInfo.getBookPub()); // BookInfo PUB
-    values.put(KEY_POSITION, bookInfo.getBookPosition()); // BookInfo Position
-    values.put(KEY_DESCRIBE, bookInfo.getDescribe()); // BookInfo Describe
+    values.put(KEY_ISBN, bookInfo.getBookISBN());           // BookInfo ISBN
+    values.put(KEY_NAME, bookInfo.getName());               // BookInfo Name
+    values.put(KEY_AUTHER, bookInfo.getBookAuthor());       // BookInfo Author
+    values.put(KEY_PUB, bookInfo.getBookPub());             // BookInfo PUB
+    values.put(KEY_POSITION, bookInfo.getBookPosition());   // BookInfo Position
+    values.put(KEY_DESCRIBE, bookInfo.getDescribe());       // BookInfo Describe
+    values.put(KEY_PICPATH, bookInfo.getBookPicturePath()); // BookInfo Picture Path
 
 	// Inserting Row
 	db.insert(TABLE_BOOKCELL, null, values);
@@ -82,13 +84,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	SQLiteDatabase db = this.getReadableDatabase();
 
 	Cursor cursor = db.query(TABLE_BOOKCELL, new String[] { KEY_ID
-		,KEY_ISBN, KEY_NAME, KEY_AUTHER, KEY_PUB, KEY_POSITION, KEY_DESCRIBE }, KEY_ID + "=?",
+		,KEY_ISBN, KEY_NAME, KEY_AUTHER, KEY_PUB, KEY_POSITION, KEY_DESCRIBE, KEY_PICPATH }, KEY_ID + "=?",
 		new String[] { String.valueOf(id) }, null, null, null, null);
 	if (cursor != null)
 	    cursor.moveToFirst();
 
         BookInfo bookInfo = new BookInfo(Integer.parseInt(cursor.getString(0)),
-		cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
+		cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7));
 	cursor.close();
 	db.close();
 
@@ -100,7 +102,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_BOOKCELL, new String[] { KEY_ID
-                        ,KEY_ISBN, KEY_NAME, KEY_AUTHER, KEY_PUB, KEY_POSITION, KEY_DESCRIBE }, KEY_NAME + "=?",
+                        ,KEY_ISBN, KEY_NAME, KEY_AUTHER, KEY_PUB, KEY_POSITION, KEY_DESCRIBE, KEY_PICPATH }, KEY_NAME + "=?",
                 new String[] { String.valueOf(title) }, null, null, null, null);
         Log.v(TAG, "get_BookInfoId_With_Title() cursor: " + cursor);
         if (cursor != null)
@@ -111,7 +113,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
 
         BookInfo bookInfo = new BookInfo(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
+                cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7));
 
         nBookId = Integer.parseInt(cursor.getString(0));
 
@@ -143,6 +145,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             bookInfo.setBookPub(cursor.getString(4));
             bookInfo.setBookPosition(cursor.getString(5));
             bookInfo.setDescribe(cursor.getString(6));
+            bookInfo.setBookPicturePath(cursor.getString(7));
 		    // Adding bookInfo to list
 		    bookInfo_list.add(bookInfo);
 		} while (cursor.moveToNext());
@@ -171,6 +174,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     values.put(KEY_PUB, bookInfo.getBookPub());
     values.put(KEY_POSITION, bookInfo.getBookPosition());
     values.put(KEY_DESCRIBE, bookInfo.getDescribe());
+    values.put(KEY_PICPATH, bookInfo.getBookPicturePath());
 
 	// updating row
 	return db.update(TABLE_BOOKCELL, values, KEY_ID + " = ?",

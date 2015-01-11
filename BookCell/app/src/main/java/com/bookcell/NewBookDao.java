@@ -58,6 +58,7 @@ public class NewBookDao {
                 newBook.setName(name);
 
                 String path = element.getAttributeValue("href");
+                Log.d(TAG, "BookPicturePath: " + path);
                 newBook.setBookPicturePath(path);
             }
         }

@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -89,17 +91,20 @@ public class homepage extends Activity implements View.OnClickListener {
                                     .getItemAtPosition(currentpostion);
                             final View viewchildren = lv_main_books.getChildAt(i);
                             ImageView iv_icon = (ImageView) viewchildren.findViewById(R.id.iv_icon);
-                            Drawable drawable = NetUtil.asyncImageLoader.loadDrawable(book.getBookPicturePath(),
-                                    new ImageCallback() {
-                                        public void imageLoaded(Drawable imageDrawable,
-                                                                String imageUrl) {
-                                            ImageView imageViewByTag = (ImageView) lv_main_books
-                                                    .findViewWithTag(imageUrl);
-                                            if (imageViewByTag != null) {
-                                                imageViewByTag.setImageDrawable(imageDrawable);
+                            Drawable drawable = null;
+                            if (isWifi(getApplicationContext())) {
+                                drawable = NetUtil.asyncImageLoader.loadDrawable(book.getBookPicturePath(),
+                                        new ImageCallback() {
+                                            public void imageLoaded(Drawable imageDrawable,
+                                                                    String imageUrl) {
+                                                ImageView imageViewByTag = (ImageView) lv_main_books
+                                                        .findViewWithTag(imageUrl);
+                                                if (imageViewByTag != null) {
+                                                    imageViewByTag.setImageDrawable(imageDrawable);
+                                                }
                                             }
-                                        }
-                                    });
+                                        });
+                            }
 
                             if (drawable != null) {
                                 iv_icon.setImageDrawable(drawable);
@@ -310,7 +315,6 @@ public class homepage extends Activity implements View.OnClickListener {
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             Log.v(TAG, "getView() position: " + position);
-            //View view = mView.get(position);
             View view = null;
             ViewCache viewCache;
             ViewHolder viewHolder = null;
@@ -325,8 +329,6 @@ public class homepage extends Activity implements View.OnClickListener {
                 viewHolder.tv_synopsis = (TextView) view.findViewById(R.id.tv_synopsis);
                 viewHolder._checkbox = (CheckBox) view.findViewById(R.id.check);
                 view.setTag(R.id.tag_second,viewHolder);
-
-               // mView.put(position, view);
             } else {
                 Log.v(TAG, "getView() convertView not null.");
                 view = convertView;
@@ -367,7 +369,6 @@ public class homepage extends Activity implements View.OnClickListener {
                         txtcount.setText( "共计 " + selectid.size() + " 项");
                     }
                     else {
-                        //toast("点击了"+list.get(position));
                         int clickedBookId = -1;
                         Intent intent = new Intent();
                         intent.setClass(homepage.this, BookDetail.class);
@@ -391,30 +392,40 @@ public class homepage extends Activity implements View.OnClickListener {
             viewHolder.tv_message.setText(newBook.getDescribe());
            // viewHolder.tv_synopsis.setText(newBook.getBookSynopsis());
             String imgUrl = newBook.getBookPicturePath();
+            Log.d(TAG, "imgUrl: " + imgUrl);
             ImageView imgBook = viewCache.getImageView();
             imgBook.setTag(imgUrl);
             if(isScrolling){
                 imgBook.setImageResource(R.drawable.ic_launcher);
             }else{
-//                Drawable drawable = NetUtil.asyncImageLoader.loadDrawable(imgUrl,
-//                        new ImageCallback() {
-//                            public void imageLoaded(Drawable imageDrawable,
-//                                                    String imageUrl) {
-//                                ImageView imageViewByTag = (ImageView) lv_main_books
-//                                        .findViewWithTag(imageUrl);
-//                                if (imageViewByTag != null) {
-//                                    imageViewByTag.setImageDrawable(imageDrawable);
-//                                }
-//                            }
-//                        });
-//
-//                if (drawable != null) {
-//                    imgBook.setImageDrawable(drawable);
-//                } else {
-//                    imgBook.setImageResource(R.drawable.ic_launcher);
-//                }
+                Drawable drawable = null;
+                if (isWifi(getApplicationContext())) {
+                    drawable = NetUtil.asyncImageLoader.loadDrawable(imgUrl,
+                            new ImageCallback() {
+                                public void imageLoaded(Drawable imageDrawable,
+                                                        String imageUrl) {
+                                    ImageView imageViewByTag = (ImageView) lv_main_books
+                                            .findViewWithTag(imageUrl);
+                                    if (imageViewByTag != null) {
+                                        imageViewByTag.setImageDrawable(imageDrawable);
+                                    }
+                                }
+                            });
+                }
 
-                imgBook.setImageResource(R.drawable.ic_launcher);
+                if (drawable != null) {
+                    Log.d(TAG, "setImageDrawable from net");
+                    imgBook.setImageDrawable(drawable);
+                } else {
+                    Log.d(TAG, "setImageDrawable from native");
+                    imgBook.setImageResource(R.drawable.ic_launcher);
+
+                    ImageView imageViewByTag = (ImageView) lv_main_books
+                            .findViewWithTag(imgUrl);
+                    if (imageViewByTag != null) {
+                        imageViewByTag.setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher));
+                    }
+                }
             }
 
             return view;
@@ -492,9 +503,6 @@ public class homepage extends Activity implements View.OnClickListener {
                 db.close();
             }
         }
-
-//        Log.v(TAG, "onResume() Set_Referash_Data()");
-//        Set_Referash_Data();
     }
 
     @Override
@@ -539,6 +547,7 @@ public class homepage extends Activity implements View.OnClickListener {
             String pub = bookInfo_array_from_db.get(i).getBookPub();
             String position = bookInfo_array_from_db.get(i).getBookPosition();
             String describe = bookInfo_array_from_db.get(i).getDescribe();
+            String picPath = bookInfo_array_from_db.get(i).getBookPicturePath();
             BookInfo bInfo = new BookInfo();
             bInfo.setID(tidno);
             bInfo.setBookISBN(isbn);
@@ -547,6 +556,7 @@ public class homepage extends Activity implements View.OnClickListener {
             bInfo.setBookPub(pub);
             bInfo.setBookPosition(position);
             bInfo.setDescribe(describe);
+            bInfo.setBookPicturePath(picPath);
 
             list.add(bInfo);
         }
@@ -594,6 +604,17 @@ public class homepage extends Activity implements View.OnClickListener {
         Toast.makeText( getApplicationContext(),
                 text, Toast.LENGTH_SHORT )
                 .show();
+    }
+
+    public static boolean isWifi(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkINfo = cm.getActiveNetworkInfo();
+        if (networkINfo != null
+                && networkINfo.getType() == ConnectivityManager.TYPE_WIFI) {
+            return true;
+        }
+        return false;
     }
 
 }

@@ -26,7 +26,7 @@ public class BookInfo {
         bookPosition = "";
     }
 
-    BookInfo(int id, String isbn, String Name, String author, String pub, String position, String Describe)
+    BookInfo(int id, String isbn, String Name, String author, String pub, String position, String Describe, String picPath)
     {
         _id = id;
         bookISBN = isbn;
@@ -35,6 +35,7 @@ public class BookInfo {
         bookPub = pub;
         bookPosition = position;
         bookDescribe = Describe;
+        bookPicturePath = picPath;
     }
 
     BookInfo()

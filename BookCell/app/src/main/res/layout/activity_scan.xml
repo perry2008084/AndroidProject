@@ -1,70 +1,8 @@
-<!--
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/btnHomepage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/title_activity_homepage"
-            />
-
-        <Button
-            android:id="@+id/btnScan"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/title_activity_scan"
-            />
-
-        <Button
-            android:id="@+id/btnSearch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/title_activity_search"
-            />
-
-    </LinearLayout>
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffe1e0de" >
-
-        <TextView
-            android:id="@+id/tv_hint"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:lines="2"
-            android:gravity="center_horizontal"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:text="@string/scan_hint"
-            />
-
-        <ImageView
-            android:id="@+id/qrcode_bitmap"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            />
-    </RelativeLayout>
-</LinearLayout>
--->
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="fill_parent"
-android:layout_height="fill_parent">
+android:layout_height="fill_parent"
+android:background="@drawable/sea"
+>
 
 <SurfaceView android:id="@+id/preview_view"
     android:layout_width="fill_parent"
@@ -220,4 +158,3 @@ android:layout_height="fill_parent">
 </TextView>
 
 </FrameLayout>
-
