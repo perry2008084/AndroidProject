@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:scrollbars="vertical"
-    android:background="@drawable/sea">
+    android:background="@drawable/welcome">
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
@@ -26,9 +26,10 @@
         android:layout_height="48dp"
         android:layout_below="@id/imgBookIcon"
         android:layout_alignParentLeft="true"
-        android:textSize="28dp"
+        android:textSize="20dp"
         android:text="@string/bookTitle"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical"
+        android:textColor="@android:color/black" />
     <TextView
         android:id="@+id/tvBookTitleText"
         android:layout_width="wrap_content"
@@ -36,16 +37,19 @@
         android:text="《苏东坡传》"
         android:layout_below="@+id/tvBookTitle"
         android:layout_toRightOf="@+id/tvBookTitle"
-        android:layout_toEndOf="@+id/tvBookTitle" />
+        android:layout_toEndOf="@+id/tvBookTitle"
+        android:textSize="15sp"
+        android:textColor="@android:color/black" />
     <TextView
         android:id="@+id/tvBookPosition"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_below="@id/tvBookTitleText"
         android:layout_alignParentLeft="true"
-        android:textSize="28dp"
+        android:textSize="20dp"
         android:text="@string/bookPosition"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical"
+        android:textColor="@android:color/black" />
     <TextView
         android:id="@+id/tvBookPositionText"
         android:layout_width="wrap_content"
@@ -56,7 +60,8 @@
         android:layout_below="@+id/tvBookPosition"
         android:layout_toRightOf="@+id/tvBookPosition"
         android:visibility="visible"
-        />
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/etBookPositionEditText"
@@ -76,9 +81,10 @@
         android:layout_height="48dp"
         android:layout_below="@id/tvBookPositionText"
         android:layout_alignParentLeft="true"
-        android:textSize="28dp"
+        android:textSize="20dp"
         android:text="@string/bookAuthor"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical"
+        android:textColor="@android:color/black" />
     <TextView
         android:id="@+id/tvBookAuthorText"
         android:layout_width="wrap_content"
@@ -87,7 +93,9 @@
         android:gravity="center_vertical"
         android:layout_toEndOf="@+id/tvBookAuthor"
         android:layout_below="@+id/tvBookAuthor"
-        android:layout_toRightOf="@+id/tvBookAuthor" />
+        android:layout_toRightOf="@+id/tvBookAuthor"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/tvBookPub"
@@ -95,9 +103,10 @@
         android:layout_height="48dp"
         android:layout_below="@id/tvBookAuthorText"
         android:layout_alignParentLeft="true"
-        android:textSize="28dp"
+        android:textSize="20dp"
         android:text="@string/bookPub"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical"
+        android:textColor="@android:color/black" />
     <TextView
         android:id="@+id/tvBookPubText"
         android:layout_width="wrap_content"
@@ -106,7 +115,9 @@
         android:gravity="center_vertical"
         android:layout_toEndOf="@+id/tvBookPub"
         android:layout_below="@+id/tvBookPub"
-        android:layout_toRightOf="@+id/tvBookPub" />
+        android:layout_toRightOf="@+id/tvBookPub"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/tvBookDescribe"
@@ -114,9 +125,10 @@
         android:layout_height="48dp"
         android:layout_below="@id/tvBookPubText"
         android:layout_alignParentLeft="true"
-        android:textSize="28dp"
+        android:textSize="20dp"
         android:text="@string/bookDescribe"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical"
+        android:textColor="@android:color/black" />
     <TextView
         android:id="@+id/tvBookDescribeText"
         android:layout_width="wrap_content"
@@ -131,7 +143,9 @@
         android:gravity="center_vertical"
         android:layout_toEndOf="@+id/tvBookDescribe"
         android:layout_below="@+id/tvBookDescribe"
-        android:layout_toRightOf="@+id/tvBookDescribe" />
+        android:layout_toRightOf="@+id/tvBookDescribe"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/bookDetailEdit"
@@ -142,7 +156,7 @@
         android:text="@string/edit"
         android:onClick="onBtnBookDetailEditClick"
         android:visibility="visible"
-        />
+        android:alpha="0.8" />
 
     <Button
         android:id="@+id/bookDetailSave"

@@ -4,9 +4,23 @@
     android:background="@drawable/welcome"
     android:onClick="startClick">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="服务每一个爱书的人！"
+        android:id="@+id/textView"
+        android:layout_gravity="center_vertical"
+        android:textAlignment="center"
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="@android:color/white"
+        android:textSize="23sp"
+        android:textIsSelectable="false"
+        android:paddingTop="50dp" />
+
     <Button
         android:id="@+id/btnStart"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="开始"
         android:layout_gravity="center_horizontal|bottom"
