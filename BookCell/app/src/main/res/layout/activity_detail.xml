@@ -1,174 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:scrollbars="vertical"
-    android:background="@drawable/welcome">
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp">
+    android:orientation="vertical"
+    android:background="@drawable/welcome"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+        <ScrollView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:scrollbars="vertical"
+            >
 
-    <ImageView
-        android:id="@+id/imgBookIcon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentLeft="true"
-        android:src="@drawable/ic_launcher"
-        android:visibility="gone"
-        />
-    <TextView
-        android:id="@+id/tvBookTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_below="@id/imgBookIcon"
-        android:layout_alignParentLeft="true"
-        android:textSize="20dp"
-        android:text="@string/bookTitle"
-        android:gravity="center_vertical"
-        android:textColor="@android:color/black" />
-    <TextView
-        android:id="@+id/tvBookTitleText"
-        android:layout_width="wrap_content"
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp">
+
+                <ImageView
+                    android:id="@+id/imgBookIcon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/ic_launcher"
+                    android:visibility="gone"
+                    />
+                <TextView
+                    android:id="@+id/tvBookTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/imgBookIcon"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="20dp"
+                    android:text="@string/bookTitle"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black" />
+                <TextView
+                    android:id="@+id/tvBookTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="《苏东坡传》"
+                    android:layout_below="@+id/tvBookTitle"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/tvBookPosition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/tvBookTitleText"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="20dp"
+                    android:text="@string/bookPosition"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black" />
+                <TextView
+                    android:id="@+id/tvBookPositionText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="书架第一层从左数第三本"
+                    android:gravity="center_vertical"
+                    android:layout_below="@+id/tvBookPosition"
+                    android:visibility="visible"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/etBookPositionEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="书架第一层从左数第三本"
+                    android:gravity="center_vertical"
+                    android:layout_below="@id/tvBookPosition"
+                    android:visibility="gone"
+                    />
+
+                <TextView
+                    android:id="@+id/tvBookAuthor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/tvBookPositionText"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="20dp"
+                    android:text="@string/bookAuthor"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black" />
+                <TextView
+                    android:id="@+id/tvBookAuthorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="林语堂"
+                    android:gravity="center_vertical"
+                    android:layout_below="@+id/tvBookAuthor"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tvBookPub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/tvBookAuthorText"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="20dp"
+                    android:text="@string/bookPub"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black" />
+                <TextView
+                    android:id="@+id/tvBookPubText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="陕西师范大学出版社"
+                    android:gravity="center_vertical"
+                    android:layout_below="@+id/tvBookPub"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tvBookDescribe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/tvBookPubText"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="20dp"
+                    android:text="@string/bookDescribe"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black" />
+                <TextView
+                    android:id="@+id/tvBookDescribeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="讲述苏东坡的人生故事，集豪迈与才华于一身。"
+                    android:gravity="center_vertical"
+                    android:layout_below="@+id/tvBookDescribe"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/bookDetailEdit"
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvBookDescribeText"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/edit"
+                    android:onClick="onBtnBookDetailEditClick"
+                    android:visibility="gone"
+                    android:alpha="0.8" />
+
+                <Button
+                    android:id="@+id/bookDetailSave"
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvBookDescribeText"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/done"
+                    android:onClick="onBtnBookDetailSaveClick"
+                    android:visibility="gone"
+                    />
+
+                <View
+                    android:layout_marginTop="@dimen/activity_detail_line_offset_Positive"
+                    android:layout_below="@id/tvBookTitleText"
+                    android:layout_height="1px"
+                    android:background="@android:color/darker_gray"
+                    android:layout_width="fill_parent"></View>
+
+                <View
+                    android:layout_above="@id/tvBookAuthor"
+                    android:layout_height="1px"
+                    android:background="@android:color/darker_gray"
+                    android:layout_width="fill_parent"
+                    android:layout_marginBottom="@dimen/activity_detail_line_offset_Negative"></View>
+
+                <View
+                    android:layout_above="@id/bookDetailEdit"
+                    android:layout_height="1px"
+                    android:background="@android:color/darker_gray"
+                    android:layout_width="fill_parent"
+                    android:layout_marginBottom="@dimen/activity_detail_line_offset_Negative"></View>
+
+                <View
+                    android:layout_above="@id/tvBookDescribe"
+                    android:layout_height="1px"
+                    android:background="@android:color/darker_gray"
+                    android:layout_width="fill_parent"
+                    android:layout_marginBottom="@dimen/activity_detail_line_offset_Negative"></View>
+
+                <View
+                    android:layout_above="@id/tvBookPub"
+                    android:layout_height="1px"
+                    android:background="@android:color/darker_gray"
+                    android:layout_width="fill_parent"
+                    android:layout_marginBottom="@dimen/activity_detail_line_offset_Negative"></View>
+
+            </RelativeLayout>
+
+        </ScrollView >
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="《苏东坡传》"
-        android:layout_below="@+id/tvBookTitle"
-        android:layout_toRightOf="@+id/tvBookTitle"
-        android:layout_toEndOf="@+id/tvBookTitle"
-        android:textSize="15sp"
-        android:textColor="@android:color/black" />
-    <TextView
-        android:id="@+id/tvBookPosition"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_below="@id/tvBookTitleText"
-        android:layout_alignParentLeft="true"
-        android:textSize="20dp"
-        android:text="@string/bookPosition"
-        android:gravity="center_vertical"
-        android:textColor="@android:color/black" />
-    <TextView
-        android:id="@+id/tvBookPositionText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="书架第一层从左数第三本"
-        android:gravity="center_vertical"
-        android:layout_toEndOf="@+id/tvBookPosition"
-        android:layout_below="@+id/tvBookPosition"
-        android:layout_toRightOf="@+id/tvBookPosition"
-        android:visibility="visible"
-        android:textColor="@android:color/black"
-        android:textSize="15sp" />
-
-    <EditText
-        android:id="@+id/etBookPositionEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="书架第一层从左数第三本"
-        android:gravity="center_vertical"
-        android:layout_below="@id/tvBookTitleText"
-        android:layout_toEndOf="@+id/tvBookPosition"
-        android:layout_toRightOf="@+id/tvBookPosition"
-        android:visibility="gone"
-        />
-
-    <TextView
-        android:id="@+id/tvBookAuthor"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_below="@id/tvBookPositionText"
-        android:layout_alignParentLeft="true"
-        android:textSize="20dp"
-        android:text="@string/bookAuthor"
-        android:gravity="center_vertical"
-        android:textColor="@android:color/black" />
-    <TextView
-        android:id="@+id/tvBookAuthorText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="林语堂"
-        android:gravity="center_vertical"
-        android:layout_toEndOf="@+id/tvBookAuthor"
-        android:layout_below="@+id/tvBookAuthor"
-        android:layout_toRightOf="@+id/tvBookAuthor"
-        android:textColor="@android:color/black"
-        android:textSize="15sp" />
-
-    <TextView
-        android:id="@+id/tvBookPub"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_below="@id/tvBookAuthorText"
-        android:layout_alignParentLeft="true"
-        android:textSize="20dp"
-        android:text="@string/bookPub"
-        android:gravity="center_vertical"
-        android:textColor="@android:color/black" />
-    <TextView
-        android:id="@+id/tvBookPubText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="陕西师范大学出版社"
-        android:gravity="center_vertical"
-        android:layout_toEndOf="@+id/tvBookPub"
-        android:layout_below="@+id/tvBookPub"
-        android:layout_toRightOf="@+id/tvBookPub"
-        android:textColor="@android:color/black"
-        android:textSize="15sp" />
-
-    <TextView
-        android:id="@+id/tvBookDescribe"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_below="@id/tvBookPubText"
-        android:layout_alignParentLeft="true"
-        android:textSize="20dp"
-        android:text="@string/bookDescribe"
-        android:gravity="center_vertical"
-        android:textColor="@android:color/black" />
-    <TextView
-        android:id="@+id/tvBookDescribeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="讲述苏东坡的人生故事，集豪迈与才华于一身。讲述苏东坡的人生故事，集豪迈与才华于一身。讲述苏东坡的人生故事，集豪迈与才华于一身。
-        讲述苏东坡的人生故事，集豪迈与才华于一身。讲述苏东坡的人生故事，集豪迈与才华于一身。讲述苏东坡的人生故事，集豪迈与才华于一身。
-        讲述苏东坡的人生故事，集豪迈与才华于一身。讲述苏东坡的人生故事，集豪迈与才华于一身。讲述苏东坡的人生故事，集豪迈与才华于一身。
-        讲述苏东坡的人生故事，集豪迈与才华于一身。讲述苏东坡的人生故事，集豪迈与才华于一身。讲述苏东坡的人生故事，集豪迈与才华于一身。
-                讲述苏东坡的人生故事，集豪迈与才华于一身。讲述苏东坡的人生故事，集豪迈与才华于一身。讲述苏东坡的人生故事，集豪迈与才华于一身。
-        讲述苏东坡的人生故事，集豪迈与才华于一身。讲述苏东坡的人生故事，集豪迈与才华于一身。讲述苏东坡的人生故事，集豪迈与才华于一身。
-        讲述苏东坡的人生故事，集豪迈与才华于一身。讲述苏东坡的人生故事，集豪迈与才华于一身。讲述苏东坡的人生故事，集豪迈与才华于一身。"
-        android:gravity="center_vertical"
-        android:layout_toEndOf="@+id/tvBookDescribe"
-        android:layout_below="@+id/tvBookDescribe"
-        android:layout_toRightOf="@+id/tvBookDescribe"
-        android:textColor="@android:color/black"
-        android:textSize="15sp" />
-
-    <Button
-        android:id="@+id/bookDetailEdit"
-        android:layout_width="96dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvBookDescribeText"
-        android:layout_alignParentRight="true"
-        android:text="@string/edit"
-        android:onClick="onBtnBookDetailEditClick"
-        android:visibility="visible"
-        android:alpha="0.8" />
-
-    <Button
-        android:id="@+id/bookDetailSave"
-        android:layout_width="96dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvBookDescribeText"
-        android:layout_alignParentRight="true"
-        android:text="@string/done"
-        android:onClick="onBtnBookDetailSaveClick"
-        android:visibility="gone"
-        />
-
-</RelativeLayout>
-
-</ScrollView >
+        android:gravity="bottom"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+        <EditText
+            android:id="@+id/bookDetailEditPlus"
+            android:hint="@string/edit"
+            android:drawableLeft="@drawable/editbox_custom"
+            android:drawableStart="@drawable/editbox_custom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/editbox_background_custom" />
+    </LinearLayout>
+</LinearLayout>

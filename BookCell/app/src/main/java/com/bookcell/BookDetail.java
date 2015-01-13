@@ -1,6 +1,7 @@
 package com.bookcell;
 
 import android.app.Activity;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +32,9 @@ public class BookDetail extends Activity{
         Log.v(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        getActionBar().setIcon(
+                new ColorDrawable(getResources().getColor(android.R.color.transparent)));
 
         getWidget();
 

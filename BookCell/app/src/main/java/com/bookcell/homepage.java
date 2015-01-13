@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -66,6 +67,9 @@ public class homepage extends Activity implements View.OnClickListener {
         delete = (Button)findViewById(R.id.delete);
         cancel.setOnClickListener(this);
         delete.setOnClickListener(this);
+
+        getActionBar().setIcon(
+                new ColorDrawable(getResources().getColor(android.R.color.transparent)));
 
         list = new ArrayList<BookInfo>();
         selectid = new ArrayList<BookInfo>();

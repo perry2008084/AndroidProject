@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -26,6 +27,8 @@ public class AppAbout extends Activity {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+        getActionBar().setIcon(
+                new ColorDrawable(getResources().getColor(android.R.color.transparent)));
     }
 
     @Override
