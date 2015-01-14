@@ -594,6 +594,9 @@ public class homepage extends Activity implements View.OnClickListener {
             case R.id.action_scan:
                 openScan();
                 return true;
+//            case R.id.action_feedback:
+//                openFeedback();
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -619,6 +622,13 @@ public class homepage extends Activity implements View.OnClickListener {
     {
         Intent intent = new Intent();
         intent.setClass(homepage.this, scan.class);
+        startActivity(intent);
+    }
+
+    void openFeedback()
+    {
+        Intent intent = new Intent();
+        intent.setClass(homepage.this, feedback.class);
         startActivity(intent);
     }
 

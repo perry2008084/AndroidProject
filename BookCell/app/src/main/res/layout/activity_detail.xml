@@ -71,16 +71,6 @@
                     android:textColor="@android:color/black"
                     android:textSize="15sp" />
 
-                <EditText
-                    android:id="@+id/etBookPositionEditText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="书架第一层从左数第三本"
-                    android:gravity="center_vertical"
-                    android:layout_below="@id/tvBookPosition"
-                    android:visibility="gone"
-                    />
-
                 <TextView
                     android:id="@+id/tvBookAuthor"
                     android:layout_width="wrap_content"
@@ -141,28 +131,6 @@
                     android:textColor="@android:color/black"
                     android:textSize="15sp" />
 
-                <Button
-                    android:id="@+id/bookDetailEdit"
-                    android:layout_width="96dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvBookDescribeText"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/edit"
-                    android:onClick="onBtnBookDetailEditClick"
-                    android:visibility="gone"
-                    android:alpha="0.8" />
-
-                <Button
-                    android:id="@+id/bookDetailSave"
-                    android:layout_width="96dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvBookDescribeText"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/done"
-                    android:onClick="onBtnBookDetailSaveClick"
-                    android:visibility="gone"
-                    />
-
                 <View
                     android:layout_marginTop="@dimen/activity_detail_line_offset_Positive"
                     android:layout_below="@id/tvBookTitleText"
@@ -178,7 +146,7 @@
                     android:layout_marginBottom="@dimen/activity_detail_line_offset_Negative"></View>
 
                 <View
-                    android:layout_above="@id/bookDetailEdit"
+                    android:layout_above="@id/tvBookPub"
                     android:layout_height="1px"
                     android:background="@android:color/darker_gray"
                     android:layout_width="fill_parent"
@@ -206,16 +174,30 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:gravity="bottom"
         android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        >
         <EditText
-            android:id="@+id/bookDetailEditPlus"
+            android:id="@+id/etBookPositionEditText"
             android:hint="@string/edit"
             android:drawableLeft="@drawable/editbox_custom"
             android:drawableStart="@drawable/editbox_custom"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:background="@drawable/editbox_background_custom" />
+            android:imeOptions="actionDone"
+            />
+
+        <Button
+            android:id="@+id/bookDetailSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/done"
+            android:onClick="onBtnBookDetailSaveClick"
+            android:visibility="visible"
+            />
     </LinearLayout>
 </LinearLayout>

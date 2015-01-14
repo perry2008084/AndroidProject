@@ -7,10 +7,11 @@
 
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
+        android:icon="@drawable/logo"
         android:logo="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
@@ -63,6 +64,15 @@
 
         <activity
             android:name=".AppAbout"
+            android:label="@string/app_name"
+            android:parentActivityName=".homepage" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.bookcell.homepage" />
+        </activity>
+
+        <activity
+            android:name=".feedback"
             android:label="@string/app_name"
             android:parentActivityName=".homepage" >
             <meta-data

@@ -68,6 +68,9 @@
     <string name="app_version">版本： 1.0</string>
     <string name="app_author">作者： 胖鱼工作室</string>
     <string name="app_email">邮箱： psj16@126.com</string>
+    <string name="app_feedback">写下您遇到的问题或者建议...</string>
+    <string name="app_feedback_title">意见反馈</string>
+    <string name="app_feedback_submit">提交</string>
 
     <item name="tag_first" type="id"></item>
     <item name="tag_second" type="id"></item>

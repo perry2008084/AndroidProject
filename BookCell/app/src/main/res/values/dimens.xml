@@ -4,4 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_detail_line_offset_Positive">3dp</dimen>
     <dimen name="activity_detail_line_offset_Negative">-3dp</dimen>
+    <dimen name="activity_about_version_offset">35dp</dimen>
 </resources>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,6 +70,14 @@ public class BookDetail extends Activity{
         btnSave = (Button)findViewById(R.id.bookDetailSave);
 
         etBookPositionEdit = (EditText)findViewById(R.id.etBookPositionEditText);
+
+        etBookPositionEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                applyChange();
+                return false;
+            }
+        });
     }
 
     public void Referash_Data(int bookId) {
@@ -91,7 +100,6 @@ public class BookDetail extends Activity{
 
         tvBookTitle.setText(name);
         tvBookPosition.setText(position);
-        etBookPositionEdit.setText(position);
         tvBookAuthor.setText(author);
         tvBookPub.setText(pub);
         tvBookDescribe.setText(describe);
@@ -99,20 +107,11 @@ public class BookDetail extends Activity{
         db.close();
     }
 
-    public void onBtnBookDetailEditClick(View view) {
-        btnEdit.setVisibility(View.GONE);
-        btnSave.setVisibility(View.VISIBLE);
-        etBookPositionEdit.setVisibility(View.VISIBLE);
-        tvBookPosition.setVisibility(View.GONE);
-
-        }
-
     public void onBtnBookDetailSaveClick(View view) {
-        btnEdit.setVisibility(View.VISIBLE);
-        btnSave.setVisibility(View.GONE);
-        etBookPositionEdit.setVisibility(View.GONE);
-        tvBookPosition.setVisibility(View.VISIBLE);
+        applyChange();
+    }
 
+    public void applyChange() {
         String bookPosTmp = etBookPositionEdit.getText().toString();
 
         if (m_nBookId != -1) {
@@ -128,8 +127,7 @@ public class BookDetail extends Activity{
         Referash_Data(m_nBookId);
     }
 
-    private void toast( String text )
-    {
+    private void toast( String text ) {
         Toast.makeText(getApplicationContext(),
                 text, Toast.LENGTH_SHORT)
                 .show();

@@ -20,7 +20,7 @@ public class AppAbout extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.v(TAG, "Welcome onCreate");
+        Log.v(TAG, "AppAbout onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
