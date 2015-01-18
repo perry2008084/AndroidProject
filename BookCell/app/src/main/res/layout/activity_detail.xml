@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/welcome"
+    android:orientation="vertical"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -181,7 +181,7 @@
         >
         <EditText
             android:id="@+id/etBookPositionEditText"
-            android:hint="@string/edit"
+            android:hint="@string/edit_hint"
             android:drawableLeft="@drawable/editbox_custom"
             android:drawableStart="@drawable/editbox_custom"
             android:layout_width="0dp"

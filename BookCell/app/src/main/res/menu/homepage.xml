@@ -16,7 +16,14 @@
         android:showAsAction="ifRoom"
     />
 
+    <item
+        android:id="@+id/action_help"
+        android:icon="@drawable/help"
+        android:title="@string/action_help"
+        android:showAsAction="never|withText"
+    />
+
     <item android:id="@+id/action_about"
         android:title="@string/action_about"
-        android:showAsAction="ifRoom|withText" />
+        android:showAsAction="never|withText" />
 </menu>

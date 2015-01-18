@@ -60,17 +60,28 @@
     <string name="action_about">关于</string>
     <string name="action_scan">扫描</string>
     <string name="action_search">搜索</string>
+    <string name="action_help">帮助</string>
     <string name="title_activity_homepage">首页</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_scan">扫描</string>
     <string name="title_activity_search">搜索</string>
     <string name="scan_hint">将条形码/二维码放入框框内，即可自动扫描信息</string>
+    <string name="edit_hint">请输入您的书本所放位置</string>
     <string name="app_version">版本： 1.0</string>
     <string name="app_author">作者： 胖鱼工作室</string>
     <string name="app_email">邮箱： psj16@126.com</string>
     <string name="app_feedback">写下您遇到的问题或者建议...</string>
     <string name="app_feedback_title">意见反馈</string>
     <string name="app_feedback_submit">提交</string>
+    <string name="app_help">
+        书格使用说明：\n
+          书格可提供给您书柜里书的记忆。\n\n
+          使用方法：\n
+        1、扫描书本后面的条形码，通过网络获取书本的相关信息\n
+        2、在书本的编辑界面，由用户输入书本放置位置（方便日后再寻找）\n
+        3、可通过搜索功能进行书本的查找，可随时更新书本放置信息\n
+        4、可随时增加或者删除您的书本信息\n
+    </string>
 
     <item name="tag_first" type="id"></item>
     <item name="tag_second" type="id"></item>

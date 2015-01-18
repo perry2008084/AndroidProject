@@ -597,6 +597,9 @@ public class homepage extends Activity implements View.OnClickListener {
 //            case R.id.action_feedback:
 //                openFeedback();
 //                return true;
+            case R.id.action_help:
+                openHelp();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -629,6 +632,13 @@ public class homepage extends Activity implements View.OnClickListener {
     {
         Intent intent = new Intent();
         intent.setClass(homepage.this, feedback.class);
+        startActivity(intent);
+    }
+
+    void openHelp()
+    {
+        Intent intent = new Intent();
+        intent.setClass(homepage.this, APPHelp.class);
         startActivity(intent);
     }
 

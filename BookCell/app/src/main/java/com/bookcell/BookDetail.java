@@ -24,7 +24,7 @@ public class BookDetail extends Activity{
     DatabaseHandler db;
 
     private TextView tvBookTitle,tvBookPosition,tvBookAuthor,tvBookPub,tvBookDescribe;
-    private Button btnEdit, btnSave;
+    private Button btnSave;
     private EditText etBookPositionEdit;
 
     private static int m_nBookId = -1;
@@ -66,7 +66,6 @@ public class BookDetail extends Activity{
         tvBookPub = (TextView)findViewById(R.id.tvBookPubText);
         tvBookDescribe = (TextView)findViewById(R.id.tvBookDescribeText);
 
-        btnEdit = (Button)findViewById(R.id.bookDetailEdit);
         btnSave = (Button)findViewById(R.id.bookDetailSave);
 
         etBookPositionEdit = (EditText)findViewById(R.id.etBookPositionEditText);
