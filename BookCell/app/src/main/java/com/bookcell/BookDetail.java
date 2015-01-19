@@ -1,11 +1,15 @@
 package com.bookcell;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,6 +31,8 @@ public class BookDetail extends Activity{
     private Button btnSave;
     private EditText etBookPositionEdit;
 
+    InputMethodManager manager;
+
     private static int m_nBookId = -1;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,9 @@ public class BookDetail extends Activity{
                 new ColorDrawable(getResources().getColor(android.R.color.transparent)));
 
         getWidget();
+
+        // get the inputMethod manager
+        manager  = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         Bundle bundle = this.getIntent().getBundleExtra("BOOK_DETAIL_INTENT");
 
@@ -113,6 +122,12 @@ public class BookDetail extends Activity{
     public void applyChange() {
         String bookPosTmp = etBookPositionEdit.getText().toString();
 
+        if (bookPosTmp.isEmpty()) {
+            toast(getString(R.string.inputEmpty));
+            manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            return;
+        }
+
         if (m_nBookId != -1) {
             db = new DatabaseHandler(this);
             BookInfo bookInfo = db.Get_BookInfo(m_nBookId);
@@ -124,6 +139,18 @@ public class BookDetail extends Activity{
         }
 
         Referash_Data(m_nBookId);
+        etBookPositionEdit.getText().clear();
+        manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+        @Override  public boolean onTouchEvent(MotionEvent event) {
+    // TODO Auto-generated method stub
+        if(event.getAction() == MotionEvent.ACTION_DOWN){
+            if(getCurrentFocus()!=null && getCurrentFocus().getWindowToken()!=null){
+                manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+        return super.onTouchEvent(event);
     }
 
     private void toast( String text ) {

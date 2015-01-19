@@ -485,13 +485,15 @@ public class homepage extends Activity implements View.OnClickListener {
             isCameraRet = bunde.getBoolean(getString(R.string.isCameraReturned));
             Log.i(TAG, "onResume isCameraRet: " + isCameraRet);
 
-            String cameraRetType = bunde.getString("CAMERA_RETURN_TYPE");
-            if (cameraRetType != "ISBN") {
-                toast(getString(R.string.notISBNCode));
-                return;
-            }
-
             if (isCameraRet) {
+                String cameraRetType = bunde.getString("CAMERA_RETURN_TYPE");
+                if (!cameraRetType.equals("ISBN")) {
+                    Log.d(TAG, "cameraRetType is not ISBN.");
+                    cameraRetType = null;
+                    toast(getString(R.string.notISBNCode));
+                    return;
+                }
+
                 Log.i(TAG, "onResume() Get (ISBN_INTENT) Intent: IS_CAMERA_RETURNED: " + isCameraRet);
                 String isbnStr = bunde.getString(getString(R.string.isbnValue));
                 Log.i(TAG, "onResume isbnStr: " + isbnStr);
@@ -512,6 +514,9 @@ public class homepage extends Activity implements View.OnClickListener {
                 bunde.putBoolean(getString(R.string.isCameraReturned), false);
 
                 db.close();
+            }
+            else {
+                toast(getString(R.string.scanEmpty));
             }
         }
     }

@@ -186,6 +186,7 @@ public class scan extends DecoderActivity {
         bundle.putBoolean("IS_CAMERA_RETURNED", true);
         bundle.putString("ISBN_VALUE", contentsTextView.getText().toString());
         bundle.putString("CAMERA_RETURN_TYPE", resultHandler.getType().toString());
+        Log.d(TAG, "resultHandler.getType(): " + resultHandler.getType().toString());
         Log.d(TAG, "handleDecodeInternally() ISBN_VALUE: " + contentsTextView.getText().toString());
         intent.putExtra("ISBN_INTENT", bundle);
         Log.i(TAG, "Send Intent IS_CAMERA_RETURNED: true");
