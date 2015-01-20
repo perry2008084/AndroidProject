@@ -75,9 +75,9 @@
     <string name="app_feedback_submit">提交</string>
     <string name="app_help">
         内容小叙：\n
-        书格是一款专为爱书人设计的书籍整理APP，通过扫描书籍的条形码获知该书的基本信息，点击书籍信息文字区域，进入编辑页面，记录图书的所在位置方便寻找书籍。\n
-        相信很多看书人都有一种同感，家里书太多了想看到书根本找不到，
-        我们也有这样一种困扰所以努力写了一个APP，现将它分享给众多爱书的你们，第一次做东西问题肯定多多，欢迎大家多多提出建议，我们会及时改正 ^_^ 。\n\n
+        书格是一款专为爱书人设计的书籍整理APP，可以通过扫描书籍的条形码获知该书的基本信息，可以点击书籍信息文字区域，进入编辑页面，记录图书的所在位置方便寻找书籍。\n
+        相信很多看书人都有同感，当家里书太多时，想看的书根本找不到，
+        我们也有这样一种困扰所以努力写了一个APP，现将它分享给众多爱书的你们，第一次做东西问题肯定多多，欢迎大家多多提出建议，以及你们想实现的功能~~我们会及时改正推出^_^ 。\n\n
 
         书格使用说明：\n
           书格可提供给您书柜里书的记忆。\n
@@ -110,7 +110,7 @@
     <string name="scanTips">请将条形码放置在扫描框中</string>
     <string name="networkDisconnet">亲，请确认是否忘记联网？</string>
     <string name="bookAlreadyInDB">亲，你扫的书本已经存在:)</string>
-    <string name="notISBNCode">亲，目前只支持扫描条形码:)</string>
+    <string name="notISBNCode">亲，目前只支持书本条形码:)</string>
     <string name="inputEmpty">亲，您没有输入任何文字:)</string>
     <string name="scanEmpty">亲，您未扫描任何东西</string>
 

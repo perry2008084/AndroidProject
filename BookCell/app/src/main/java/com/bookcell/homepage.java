@@ -515,9 +515,6 @@ public class homepage extends Activity implements View.OnClickListener {
 
                 db.close();
             }
-            else {
-                toast(getString(R.string.scanEmpty));
-            }
         }
     }
 
